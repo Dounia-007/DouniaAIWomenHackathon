@@ -3,17 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 253, 253, 253;
+  --forest: #00332c;
+  --copper: #d2a06f;
+  --ivory: #fdfdfd;
+  --slate: #0f172a;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--ivory);
+  color: var(--slate);
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4 {
-  letter-spacing: -0.05em;
+/* Custom glow effect for the AI sections */
+.ai-glow {
+  box-shadow: 0 0 50px -12px rgba(210, 160, 111, 0.3);
+}
+
+/* Smooth transitions for sections */
+.section-fade {
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
