@@ -13,21 +13,23 @@ Use `npm run build` for a production build and `npm run start` to serve that bui
 
 ## What you can explore
 
-- Three illustrative candidate metrics and a custom-metric form.
-- A nine-attribute framework explorer and editable multidimensional profile.
-- A conflict matrix organised by meaning, evidence, time horizon, accountability and metric-specific assumptions.
-- Explicit labels for illustrative positions, rule-based prompts and user-entered positions.
-- Issue classifications, participant positions, notes and user-confirmed resolutions.
-- A meeting agenda derived from the remaining open issues, with links back to their source.
-- A downloadable text agenda containing the context, positions, source labels, notes, resolutions and attribute profile.
+- The research framework, with nine attributes and their definitions.
+- A worked carbon-adjusted EPS case supplied by Dounia Chlyeh.
+- Two entry points: an existing integrated KPI or separate financial and sustainability metrics.
+- A guided sequence: understand the metric, compare nine attributes across CEO/sustainability manager/operational manager, explore potential friction, and prepare an agenda.
+- A shared researcher baseline, explicit assumptions and separately labelled illustrative role interpretations.
+- Three issue cards with participant positions, notes and user-confirmed resolutions.
+- An editable agenda generated from unresolved issues and a downloadable review containing the matrix, assumptions, notes and resolutions.
 
-Different candidates keep independent review state while the page is open. Reloading clears that state. Rebuilding a custom review replaces its previous custom state; download the agenda first to preserve it. There is no database, browser-storage persistence or upload feature.
+Each entry point retains independent state while the page is open. Reloading clears it. Preparing a replacement worksheet resets that route's notes with an explicit warning. Inputs are not submitted to a person or remote service. Download before reloading to retain the review.
 
-## What the prototype does not claim
+## Assessment boundaries
 
-It does not call an AI model, retrieve interviews, predict real managers' behaviour, calculate financial outcomes, or validate a metric. Custom metric structure and horizon select explicit discussion prompts. Free text is displayed as user context; it is not semantically analysed. The framework references were supplied by the researcher and have not been independently verified here. The low/medium/high descriptors are provisional within-attribute assessments, not calibrated scoring thresholds. There is no overall quality or credibility score.
+No AI model or interview collection is connected. The EPS case uses researcher-supplied classifications; its role interpretations and conflict map are proposed applications, not empirical findings. Time orientation is explicitly proposed, pending confirmation. Accuracy, reliability, complexity, transparency and cost retain their stated conditions rather than being presented as verified findings.
 
-A job title does not establish a stakeholder orientation. Default role positions are illustrative and can be replaced by the user. Marking an issue resolved records a user judgement; it is not independent verification. Attribute edits are included in the export but do not automatically establish or resolve conflict.
+Custom inputs create a worksheet with unassessed attributes and framework-based questions. Separate metrics receive five preliminary integration questions, but no invented formula or recommendation. Keeping measures separate is a legitimate possible outcome. The application does not calculate financial outcomes or establish a causal relationship from metric names.
+
+A job title does not establish someone's priorities. No overall quality or conflict score is calculated. Resolutions record a user judgement. Attribute notes are exported but do not automatically generate role disagreement. Framework references were supplied by the researcher and are not independently verified here.
 
 ## Where to edit
 
@@ -37,7 +39,8 @@ A job title does not establish a stakeholder orientation. Default role positions
 | `app/globals.css` | Navy, white and orange styling, responsive layouts and motion |
 | `app/components/FrameworkExplorer.js` | Research framework browser |
 | `app/components/MetricLab.js` | Custom form, review state, conflict map, profile and agenda |
-| `app/lib/metric-data.js` | Definitions, examples, issue-generation rules and export content |
+| `app/lib/metric-data.js` | Research attribute definitions |
+| `app/lib/eps-case.js` | EPS baseline, assumptions, role interpretations and worksheet questions |
 | `app/layout.tsx` | Page title, description and fonts |
 
 ## Continuing toward evidence-grounded AI
