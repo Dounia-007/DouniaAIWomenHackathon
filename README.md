@@ -1,68 +1,150 @@
 # Metric Lab
 
-An interactive prototype for examining integrated sustainability and financial KPIs. Built with Next.js and React, using the nine-attribute framework supplied by Dounia Chlyeh.
+Connect sustainability and financial performance through metrics you can act on.
 
-## Run it locally
+Metric Lab is a research-grounded prototype developed by Dounia Chlyeh with AI-assisted design and implementation for an AI women hackathon. It helps companies examine integrated key performance indicators (iKPIs), understand their assumptions, compare managerial interpretations and prepare a focused discussion agenda.
 
-1. Download or clone this repository.
-2. Install a Node.js version compatible with the Next.js version in `package.json`.
-3. Run `npm ci` to install the locked dependencies.
-4. Run `npm run dev` and open the local URL printed in the terminal.
+## Open the project
 
-Use `npm run build` for a production build and `npm run start` to serve that build. `npm run lint` checks the source. The worked example needs no credentials. Live AI assessment requires Vercel AI Gateway access as described below.
+- [Website preview](https://dounia-ai-women-hackathon-git-design-me-1129c3-metric-mortality.vercel.app)
+- [Current implementation branch](https://github.com/Dounia-007/DouniaAIWomenHackathon/tree/design/metric-lab-framework)
+- [Draft pull request and changes](https://github.com/Dounia-007/DouniaAIWomenHackathon/pull/1)
+- [Development history and research preparation](docs/DEVELOPMENT_HISTORY.md)
 
-## What you can explore
+At the time of this documentation, the implementation is on `design/metric-lab-framework`. The pull request is open and has not been merged into `main`. Review the branch linked above when judging this submission.
 
-- The research framework, with nine attributes and their definitions.
-- A worked carbon-adjusted EPS case supplied by Dounia Chlyeh.
-- Two entry points: an existing integrated KPI or separate financial and sustainability metrics.
-- A guided sequence: understand the metric, compare nine attributes across CEO/sustainability manager/operational manager, explore potential friction, and prepare an agenda.
-- A shared researcher baseline, explicit assumptions and separately labelled illustrative role interpretations.
-- Three issue cards with participant positions, notes and user-confirmed resolutions.
-- An editable agenda generated from unresolved issues and a downloadable review containing the matrix, assumptions, notes and resolutions.
+## The problem
 
-Each entry point retains independent state while the page is open. Reloading clears it. Preparing a replacement worksheet resets that route's notes with an explicit warning. Inputs are not submitted to a person or remote service. Download before reloading to retain the review.
+Companies may measure sustainability and financial performance separately while making decisions that depend on both. Sustainability information can remain in disclosure while financial indicators guide resource allocation.
 
-## Assessment boundaries
+Combining two numbers does not automatically create a useful metric. The same indicator may mean different things to a CEO, sustainability manager and operational manager. Its assumptions, measurement boundaries and allocation of responsibility need examination before it is used.
 
-The manual worked example and worksheets do not call AI. The separate AI assessment flow calls a server-side research-grounded agent. The EPS case uses researcher-supplied classifications; its role interpretations and conflict map are proposed applications, not empirical findings. Time orientation is explicitly proposed, pending confirmation. Accuracy, reliability, complexity, transparency and cost retain their stated conditions rather than being presented as verified findings.
+## The proposed solution
 
-Custom inputs create a worksheet with unassessed attributes and framework-based questions. Separate metrics receive five preliminary integration questions, but no invented formula or recommendation. Keeping measures separate is a legitimate possible outcome. The application does not calculate financial outcomes or establish a causal relationship from metric names.
+Metric Lab offers one assessment journey for an existing iKPI or separate financial and sustainability measures. A prepared carbon-adjusted EPS example works without an AI connection. Custom assessment uses an AI agent supplied with the research framework and de-identified evidence.
 
-A job title does not establish someone's priorities. No overall quality or conflict score is calculated. Resolutions record a user judgement. Attribute notes are exported but do not automatically generate role disagreement. Framework references were supplied by the researcher and are not independently verified here.
+| Company question | Output |
+| --- | --- |
+| Does this metric meaningfully connect financial and sustainability performance? | A nine-attribute assessment with reasoning, assumptions and missing evidence |
+| What could it mean to different managers? | Three hypothetical role perspectives and a potential conflict map |
+| What needs resolving before use? | A discussion agenda linked to unresolved issues |
 
-## Where to edit
+The research section explains the framework separately. The assessment section presents an overview, attribute assessment, potential conflicts and agenda progressively. Users can record resolutions and download their assessment. A resolution removes the issue from the open agenda.
+
+## Research foundation
+
+Dounia supplied the conceptual framework, an Excel coding workbook, a typology manuscript and 33 Word files containing interview coding summaries. The manuscript and workbook were inspected during development. The deployed application does not retrieve the original files.
+
+The nine attributes are controllability, managerial impact, time orientation, indicator complexity, transparency, stakeholder orientation, accuracy, reliability and signal cost. They describe categories, dimensions and conditional levels, not nine interchangeable numeric scores.
+
+A de-identified derivative contains 99 selective paraphrases of analytical coding themes, three per source document, and 21 candidate metric records. These comprise 17 workbook candidates, the researcher-supplied EPS example and three further candidates identified during review. Candidate inclusion does not establish iKPI validity or a complete assessment.
+
+Names, original source codes, organisations, biographies and identifying anecdotes were excluded from the derivative. It uses neutral source identifiers. It is a selective synthesis, not a fully anonymised reproduction of all interview documents. No participant identity key is included. Residual recognition through research themes cannot be ruled out.
+
+The workbook contains older categories, including item-count complexity, which have not been automatically converted into the newer conceptual framework. Its historical classifications are not presented as current training labels.
+
+## How the AI works
+
+The server creates an AI SDK `ToolLoopAgent` for each custom assessment. The model receives:
+
+1. The nine-attribute definitions and subdimensions.
+2. The conditional carbon-adjusted EPS worked example.
+3. All 99 de-identified coding paraphrases with source identifiers.
+4. The candidate metric names and their limitations.
+5. The company's submitted metric and optional decision context.
+
+This is structured inference with supplied research context. It is not model fine-tuning, embedding-based retrieval or a validated prediction of managerial behaviour. The small evidence collection is supplied in full for each request. The agent has no external search or action tools.
+
+The response includes all nine attributes, three role perspectives per attribute, assumptions, missing evidence, clarifying questions and up to three potential conflicts. Each conflict links to attributes and an agenda item. The server checks the response structure and whether cited identifiers belong to the supplied corpus. It does not verify that a cited passage substantively supports the model's inference.
+
+The default model is `openai/gpt-6-astra` through Vercel AI Gateway. `METRIC_LAB_MODEL` can override it. The prepared EPS example bypasses the model and uses the same display components.
+
+## Current functionality and verification
+
+| Item | Status |
+| --- | --- |
+| Unified form and prepared EPS example | Implemented |
+| Nine-attribute and three-role display | Implemented |
+| Evidence references, conflict map, resolution notes and download | Implemented |
+| Server-side AI request and response validation | Implemented |
+| Production build, TypeScript and ESLint | Passed during development |
+| Missing-credential, invalid-input and cross-origin handling | Checked locally |
+| Prepared example, mocked AI result, agenda and mobile display | Checked with browser automation |
+| Successful live provider assessment | Not independently verified in this development session |
+| Scientific validity or predictive accuracy | Not established |
+
+The user reported an activation-required message. Setup instructions were provided, but credential installation and a successful live assessment have not been confirmed. A configured credential is not proof of available credits or successful inference. Mocked browser responses demonstrate interface behaviour only.
+
+## Run locally
+
+Use a Node.js release compatible with the locked Next.js dependency. Development checks in this session used Node.js 24.
+
+```bash
+git clone --branch design/metric-lab-framework https://github.com/Dounia-007/DouniaAIWomenHackathon.git
+cd DouniaAIWomenHackathon
+npm ci
+npm run dev
+```
+
+Open the local URL printed in the terminal. Without credentials, choose **Try an example · Carbon-adjusted EPS**. Custom input remains disabled when credential presence cannot be established.
+
+To enable local custom assessment, copy `.env.example` to `.env.local`, set `AI_GATEWAY_API_KEY` privately and restart the server. Never commit the populated file.
+
+```bash
+npm run build
+npx tsc --noEmit
+npm run lint
+npm run start
+```
+
+The last command serves the production build after `npm run build` has completed.
+
+## Activate on Vercel
+
+1. Create an AI Gateway key in the correct Vercel workspace. See [AI Gateway keys](https://vercel.com/docs/ai-gateway/authentication-and-byok/api-keys).
+2. In the website project's environment variables, save the key as `AI_GATEWAY_API_KEY` for **Preview**. Use Production separately when publishing the production version.
+3. Redeploy the preview, then reload the website and request a custom assessment. Environment changes require a new deployment.
+4. Confirm that the service has available usage credits and that a real assessment completes before presenting live AI as verified.
+
+Vercel OIDC is also supported when present. Secrets are read on the server and must never use a `NEXT_PUBLIC_` prefix. Do not put a key in GitHub, a screenshot, chat or a public form.
+
+## Architecture and files
 
 | File | Purpose |
 | --- | --- |
-| `app/page.tsx` | Branding, introductory sections and page composition |
-| `app/globals.css` | Navy, white and orange styling, responsive layouts and motion |
-| `app/components/FrameworkExplorer.js` | Research framework browser |
-| `app/components/MetricLab.js` | Custom form, review state, conflict map, profile and agenda |
-| `app/lib/metric-data.js` | Research attribute definitions |
-| `app/lib/eps-case.js` | EPS baseline, assumptions, role interpretations and worksheet questions |
-| `app/layout.tsx` | Page title, description and fonts |
+| `app/page.tsx` | Product story and page composition |
+| `app/components/FrameworkExplorer.js` | Research framework explanation |
+| `app/components/AIReview.js` | Unified input, prepared example, generated results and downloads |
+| `app/api/assess/route.js` | Credential check, input checks and server-side model request |
+| `app/lib/server/assessment.js` | Model instructions, response schema and validation |
+| `app/lib/server/evidence.json` | De-identified evidence derivative and candidate catalogue |
+| `app/lib/eps-case.js` | Prepared EPS baseline, assumptions and illustrative conflicts |
+| `app/lib/metric-data.js` | Attribute definitions and older prototype helpers |
+| `app/components/MetricLab.js` | Earlier manual interface retained in source but no longer rendered |
+| `app/globals.css` | Styling and responsive layouts |
+| `.env.example` | Empty credential template and optional model setting |
 
-## Continuing toward evidence-grounded AI
+The stack is Next.js 16, React 19, TypeScript/JavaScript, CSS/Tailwind tooling and AI SDK 7, hosted through Vercel's GitHub integration. Exact dependencies are in `package-lock.json`.
 
-A later implementation can retrieve approved, anonymised interview excerpts on the server and propose structured interpretations with source links. Keep interview evidence, user statements and model inference distinct. Assessment criteria and behavioural claims need evaluation with practitioners before predictive-validity claims can be made. Store future API credentials only in server-side environment variables, never in browser code.
+## Data handling and limitations
 
-## Reviewing on GitHub and Vercel
+The application does not persist company submissions or generated results. React state lasts until reload or replacement by another result. Downloads retain the displayed review locally. The AI provider processes custom inputs under the configured account's service terms.
 
-Changes are prepared on a separate review branch. Open its pull request to inspect the differences. If the repository's Vercel integration is configured to build branch previews, use the preview link shown by the deployment check. Review the prototype before merging it into the production branch.
+Only the de-identified derivative is committed, not the research manuscript, original workbook or interview files. Because this repository is public, the committed derivative is publicly readable, even though the application imports it on the server. Server-side processing protects credentials; it does not make repository content private.
 
-## Live research-grounded AI
+Input limits, same-origin checks, a timeout and per-instance request throttling are implemented. The throttle is not distributed and is not a hard spending cap. Broad public use requires additional operational controls and scientific evaluation. Assessments may be incorrect, assumptions may be missing and the model may associate an authentic source ID with unsupported reasoning.
 
-The main lab now calls `/api/assess`, a server-side AI SDK ToolLoopAgent using the nine-attribute framework, the conditional EPS baseline, 99 de-identified paraphrases of analytical coding themes and 21 candidate metric names. This is inference with supplied research context, not fine-tuning. Original interviews, names and identity keys are not included.
+## Human and AI contributions
 
-Authentication uses Vercel OIDC when available, or `AI_GATEWAY_API_KEY` in the deployment environment. If activation is required, add an AI Gateway key in Vercel Project Settings > Environment Variables for Preview (and Production when ready), then redeploy. Never enter keys into the website or commit them. `METRIC_LAB_MODEL` optionally overrides the default `openai/gpt-6-astra` model. Provider usage can incur charges.
+Dounia developed the research concept and nine-attribute framework, provided the research materials and EPS classifications, selected the managerial perspectives, directed the product story and approved design changes. ChatGPT/Codex assisted with critical discussion, interface design, coding, selective evidence paraphrasing, checks and documentation.
 
-The result contains nine attribute profiles, three hypothetical role perspectives per attribute, explicit assumptions and missing evidence, validated evidence identifiers, up to three potential conflicts and linked agenda points. Exact output shape and citation identifiers are checked server-side. Citation relevance and scientific validity still need human evaluation. Evidence paraphrases are not participant quotations. The small de-identified corpus is supplied in full on each request; no embedding index or raw document retrieval is used.
+GitHub records commits made through the connected account under `Dounia-007`. This attribution does not mean the code was written without AI assistance. The development history explains that division of work and identifies the milestones preserved in GitHub.
 
-Requests and results are not stored by this app. Results have a generation ID and downloadable text export but no persistent history. The AI provider processes submitted text under the account's service terms. Input limits, same-origin checks, a timeout and per-instance throttling are included. The in-memory throttle is not a distributed spending limit; configure platform controls before broad public use.
+## Demonstration sequence
 
-Validation includes build/type/lint checks, input/origin/unconfigured API checks, and browser tests using a clearly separate fixture for result rendering, evidence display, resolution-to-agenda and export. A fixture does not demonstrate a successful provider call.
-
-## Unified assessment interface
-
-One Assess your metric section now handles custom submissions and the prepared EPS example. Both use the same overview, nine-attribute view, conflict map and downloadable agenda. GET /api/assess checks credential presence before enabling custom input; this is not a provider health or credit check. Provider activation errors disable custom input for that page session. The prepared example is available without credentials and clearly distinguished from AI-generated results.
+1. Explain the problem of separate measurement and divergent interpretation.
+2. Open **Assess your metric** and choose the prepared EPS example.
+3. Inspect its assumptions and the nine attributes across the three roles.
+4. Open a potential conflict, record a resolution and show the resulting agenda.
+5. Download the assessment.
+6. Demonstrate a custom AI assessment only after activation and a successful live test. Clearly distinguish its proposals from the prepared researcher baseline.
