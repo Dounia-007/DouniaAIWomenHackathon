@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Metric Lab | Sustainability meets financial performance",
-  description: "Connect sustainability and financial performance through integrated KPIs. Explore how finance, sustainability and operations interpret the same metric.",
+  description: "Connect sustainability and financial performance through metrics you can act on. Examine assumptions, compare managerial perspectives and prepare a focused discussion agenda.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
