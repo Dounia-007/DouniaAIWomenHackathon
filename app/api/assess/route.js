@@ -10,7 +10,7 @@ export async function POST(request){
  let input;
  try{const text=await request.text();if(text.length>10000)return Response.json({error:'Please shorten the metric description.'},{status:413});input=JSON.parse(text)}catch{return Response.json({error:'Please enter a metric name or description.'},{status:400})}
  if(!input||!['existing','paired'].includes(input.mode)||typeof input.metric!=='string'||!input.metric.trim()||input.metric.length>4000||typeof input.context!=='string'||input.context.length>3000)return Response.json({error:'Enter a metric description and keep the context under 3,000 characters.'},{status:400});
- if(!process.env.AI_GATEWAY_API_KEY&&!process.env.VERCEL_OIDC_TOKEN)return Response.json({error:'AI assessment is awaiting activation by the site owner. The worked example remains available.',code:'AI_SETUP_REQUIRED'},{status:503});
+ if(!process.env.AI_GATEWAY_API_KEY&&!process.env.VERCEL_OIDC_TOKEN)return Response.json({error:'No AI credential is configured for this deployment. The site owner needs to add AI_GATEWAY_API_KEY in Vercel for this environment and redeploy. Your entries remain in the form.',code:'AI_SETUP_REQUIRED'},{status:503});
  const now=Date.now();for(const [k,v]of requests)if(v.until<now)requests.delete(k);
  const key=request.headers.get('x-forwarded-for')?.split(',')[0]||'local';const record=requests.get(key)||{count:0,until:now+60000};
  if(record.count>=3||requests.size>1000)return Response.json({error:'Please wait a minute before requesting another assessment.'},{status:429});record.count++;requests.set(key,record);
@@ -24,6 +24,7 @@ export async function POST(request){
  }catch(error){
  const status=error?.statusCode;
  const setup=[401,402,403].includes(status);
- return Response.json({error:setup?'The AI service needs activation or available credits. Please contact the site owner.':'The AI assessment could not be completed. Please retry or add the formula and decision context.',code:setup?'AI_SETUP_REQUIRED':'ASSESSMENT_FAILED'},{status:setup?503:502});
+ const setupMessage=status===402?'The AI provider reports a billing or credit problem. The site owner needs to check AI Gateway usage and billing.':status===401?'The AI provider rejected the credential. The site owner needs to check the server-side AI Gateway key and redeploy.':'The AI provider denied access. The site owner needs to check the gateway account and model permissions.';
+ return Response.json({error:setup?setupMessage:'The AI assessment could not be completed. Please retry or add the formula and decision context.',code:setup?'AI_SETUP_REQUIRED':'ASSESSMENT_FAILED'},{status:setup?503:502});
  }
 }

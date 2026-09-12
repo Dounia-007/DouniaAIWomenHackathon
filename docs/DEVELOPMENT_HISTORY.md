@@ -85,3 +85,7 @@ No successful live inference was independently verified. The user observed the a
 ## Work remaining after the hackathon prototype
 
 Activate and test the AI provider, evaluate generated assessments against researcher-reviewed cases, reconcile legacy workbook categories, check citation relevance, improve evidence coverage, and validate role interpretations with practitioners. Additional use in companies would require appropriate data governance, durable state if needed and operational controls. These are future tasks, not completed features.
+
+## Follow-up fix for disabled custom input
+
+The activation preflight previously disabled the entire form. A subsequent fix keeps fields editable, allows POST to retry independently of the preflight, and preserves entries and previous results on failure. Server errors distinguish missing credentials, provider authentication, billing and access failures. The production build and lint passed; browser checks confirmed typing without credentials, entry retention after a real local 503 and rendering a mocked successful response after a failed preflight. Live provider access remains unverified because the Vercel connection returns 403.

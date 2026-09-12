@@ -86,7 +86,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed in the terminal. Without credentials, choose **Try an example · Carbon-adjusted EPS**. Custom input remains disabled when credential presence cannot be established.
+Open the local URL printed in the terminal. Without credentials, choose **Try an example · Carbon-adjusted EPS**. Custom fields remain editable even when the connection check fails. Submitting retries the server directly; setup errors preserve the entries and any previous result.
 
 To enable local custom assessment, copy `.env.example` to `.env.local`, set `AI_GATEWAY_API_KEY` privately and restart the server. Never commit the populated file.
 
