@@ -1,0 +1,880 @@
+{
+  "description": "De-identified evidence-only derivative for research review and later AI use. Original documents are not included.",
+  "coverage": {
+    "source_documents": 33,
+    "selected_coded_theme_paraphrases": 99,
+    "metric_candidates": 21
+  },
+  "limitations": "Selective extraction of three coded themes per document. Nuance, direct quotations and contextual detail have been reduced to minimise identification risk. Not a full anonymised transcript corpus. Residual recognition from research themes cannot be ruled out.",
+  "use_rules": [
+    "Use evidence IDs when referring to a coded theme.",
+    "These are selective paraphrases of analytical summaries, not quotations, transcripts or validated generalisations.",
+    "Do not infer participant names, employers, locations, job histories or specific managerial roles.",
+    "Do not map a source automatically to CEO, sustainability manager or operational manager. Role-specific applications must be labelled as model inferences.",
+    "Do not treat repetition of a theme as a prevalence estimate or statistical prediction.",
+    "Do not classify a candidate as an integrated KPI solely because it appears in the catalogue. Check that it connects financial and sustainability dimensions.",
+    "Do not infer a formula where none is specified.",
+    "Do not reuse legacy workbook classifications without reconciling them with the current framework.",
+    "Evidence can support, qualify or challenge an assessment; return insufficient evidence where necessary."
+  ],
+  "sources": [
+    {
+      "source_id": "SRC-001",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-001-E01",
+          "text": "Customer evidence can influence whether sustainability investments receive priority.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-001-E02",
+          "text": "Uncertainty about environmental benefits can increase the effort needed to justify action.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-001-E03",
+          "text": "Competing organisational priorities can delay adoption even when a measure is of interest.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-002",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-002-E01",
+          "text": "Information disclosed externally may differ from information used in management decisions.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-002-E02",
+          "text": "Combining measures may reduce the interpretive effort of examining their relationship.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-002-E03",
+          "text": "The added value of an integrated indicator should be compared with using separate indicators together.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-003",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-003-E01",
+          "text": "Physical and financial denominators can answer different comparison questions.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-003-E02",
+          "text": "Environmental rehabilitation provisions relative to asset values were discussed as a possible liability measure.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-003-E03",
+          "text": "Differences in assumed product lifetimes can undermine comparability of emissions estimates.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-004",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-004-E01",
+          "text": "Financial records and emissions estimates may rely on different evidence and measurement methods.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-004-E02",
+          "text": "Data sources and limitations should be made visible when an integrated metric is interpreted.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-004-E03",
+          "text": "Incomplete data may favour internal experimentation before external comparison.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-005",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-005-E01",
+          "text": "Availability of data is a practical prerequisite for measurement.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-005-E02",
+          "text": "A declared internal carbon price may not actually influence decisions.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-005-E03",
+          "text": "Leadership support and the presentation of a metric can affect whether it is used.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-006",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-006-E01",
+          "text": "Demand for a decision should precede development of a metric.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-006-E02",
+          "text": "Customer requirements can create demand for sustainability data.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-006-E03",
+          "text": "Understanding the underlying risk can be necessary before deciding what to measure.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-007",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-007-E01",
+          "text": "A formally required measurement process may receive little substantive use.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-007-E02",
+          "text": "Separate purchasing and sustainability budgets can create conflicting decision rights.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-007-E03",
+          "text": "Useful measurement needs to inform action, not only describe performance.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-008",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-008-E01",
+          "text": "Decision value and stakeholder support can both be necessary for a metric to endure.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-008-E02",
+          "text": "Internal use can continue even when a metric is not publicly disclosed.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-008-E03",
+          "text": "Materiality and sector complexity can limit the suitability of a common measurement design.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-009",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-009-E01",
+          "text": "Forward-looking environmental risk can be incorporated into financial scenarios.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-009-E02",
+          "text": "Revenue relative to emissions was discussed as a potential governance measure.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-009-E03",
+          "text": "Historical expenditure and projected expenditure answer different decision questions.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-010",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-010-E01",
+          "text": "A monetised environmental measure may be discontinued when its communication creates difficulties.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-010-E02",
+          "text": "Differences in data definitions across business units can complicate aggregation.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-010-E03",
+          "text": "Integrated measures may support internal risk assessment and resource requests.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-011",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-011-E01",
+          "text": "Integration needs to be understandable within existing business decision processes.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-011-E02",
+          "text": "Excessive complexity can reduce practical use.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-011-E03",
+          "text": "Supply-chain measurement can require information from other organisations.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-012",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-012-E01",
+          "text": "Financial and sustainability integration may impose unequal demands on the two perspectives.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-012-E02",
+          "text": "Adjustable assumptions can undermine confidence in a metric.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-012-E03",
+          "text": "Strategic purpose and decision context should guide metric selection.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-013",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-013-E01",
+          "text": "Including environmental implications can change how an investment proposal is evaluated.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-013-E02",
+          "text": "Financial and sustainability inputs may have different data-quality foundations.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-013-E03",
+          "text": "Joint design and small-scale experimentation can precede investment in integrated systems.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-014",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-014-E01",
+          "text": "Adding a modelled carbon cost to total cost of ownership can support comparison of investment alternatives.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-014-E02",
+          "text": "Incomplete operating data can obstruct otherwise straightforward calculations.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-014-E03",
+          "text": "A shared method may help functions discuss financial and environmental trade-offs.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-015",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-015-E01",
+          "text": "Departmental environmental budgets can connect organisational constraints to operational choices.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-015-E02",
+          "text": "A focus on financial returns alone may divert attention from the intended environmental outcome.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-015-E03",
+          "text": "Centralised data can support calculation across functions.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-016",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-016-E01",
+          "text": "Integrated indicators may complement separate measures rather than replace them.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-016-E02",
+          "text": "Metric design needs a connection to strategy and resource allocation.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-016-E03",
+          "text": "Differences between financial and sustainability functions can complicate implementation.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-017",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-017-E01",
+          "text": "Relative measures may obscure absolute outcomes that remain unacceptable.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-017-E02",
+          "text": "A proposed indicator should be tested for information it adds beyond its components.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-017-E03",
+          "text": "Disclosure of new information may introduce reputational concerns.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-018",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-018-E01",
+          "text": "Links to remuneration can influence whether sustainability considerations affect behaviour.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-018-E02",
+          "text": "Short decision horizons can conflict with longer-term sustainability outcomes.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-018-E03",
+          "text": "Stable measurement methods can support confidence in comparisons over time.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-019",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-019-E01",
+          "text": "Intensity indicators require checking whether movements in the denominator change the interpretation of performance.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-019-E02",
+          "text": "External comparison can favour consistent methods over customised construction.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-019-E03",
+          "text": "Leadership changes may weaken the continuity of sustainability targets.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-020",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-020-E01",
+          "text": "A material relationship with financial performance can provide a starting point for design.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-020-E02",
+          "text": "Trust in a measure and usefulness for decisions should be examined separately.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-020-E03",
+          "text": "External reporting adoption may depend on whether intended users actually use the metric.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-021",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-021-E01",
+          "text": "Consistent base-data definitions and calculation methods can support derived indicators.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-021-E02",
+          "text": "Performance incentives can create unintended behaviours that undermine the intended outcome.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-021-E03",
+          "text": "Integrated measures may be embedded within existing accounting processes.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-022",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-022-E01",
+          "text": "Activity associated with transition investments can increase measured emissions, complicating interpretation.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-022-E02",
+          "text": "A metric useful for comparing investments may not suit individual project selection.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-022-E03",
+          "text": "Investment mandates and return requirements can constrain adoption of sustainability measures.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-023",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-023-E01",
+          "text": "Integrated measures may be easier to sustain when embedded in existing management systems.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-023-E02",
+          "text": "Duplicate reporting processes can increase implementation burdens.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-023-E03",
+          "text": "A measure that is material in one activity may have little relevance in another.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-024",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-024-E01",
+          "text": "Costs relative to emissions reductions can support prioritisation of decarbonisation measures.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-024-E02",
+          "text": "Environmental impact relative to expenditure can support internal budget discussions.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-024-E03",
+          "text": "Links between financing terms and sustainability performance may provide a route to adoption.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-025",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-025-E01",
+          "text": "Reporting requirements can consume capacity that might otherwise support implementation.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-025-E02",
+          "text": "Peer adoption and perceived risk may influence interest in voluntary metrics.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-025-E03",
+          "text": "Disclosure obligations and performance improvement are distinct motivations.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-026",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-026-E01",
+          "text": "Stakeholder demand for comparability can motivate voluntary measurement.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-026-E02",
+          "text": "Annual reporting frequency may be inadequate for decisions requiring more frequent information.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-026-E03",
+          "text": "Information systems and staff capability can constrain implementation.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-027",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-027-E01",
+          "text": "Combining uncertain sustainability data with financial data does not remove uncertainty.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-027-E02",
+          "text": "Facility-level analysis may be more actionable than company-level aggregation.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-027-E03",
+          "text": "A relationship between component variables should be established before integration.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-028",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-028-E01",
+          "text": "Missing value-chain emissions data can prevent meaningful integrated measurement.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-028-E02",
+          "text": "The marginal effort of combining existing data may be modest, while collecting missing data can be substantial.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-028-E03",
+          "text": "Customer demands can motivate measurement even without direct reporting obligations.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-029",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-029-E01",
+          "text": "Combining variables can reduce interpretability even when integration is intended to help.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-029-E02",
+          "text": "A coordinated set of separate measures may be preferable to one combined indicator.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-029-E03",
+          "text": "Expenditure measures should not be interpreted automatically as evidence of achieved outcomes.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-030",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-030-E01",
+          "text": "Cost reduction and environmental improvement can provide an entry point for integration.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-030-E02",
+          "text": "Certification and reporting may remain disconnected from board decisions.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-030-E03",
+          "text": "Organisational culture can affect whether measurement becomes embedded in practice.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-031",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-031-E01",
+          "text": "An identifiable decision owner is important to the practical value of a proposed metric.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-031-E02",
+          "text": "Implementation processes can matter as much as the metric formula.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-031-E03",
+          "text": "Local decision needs may favour decentralised use within a common framework.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-032",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-032-E01",
+          "text": "Basic financial and sustainability data may be unavailable before integrated measurement begins.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-032-E02",
+          "text": "Linking sustainability activity to profitability may help explain its managerial relevance.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-032-E03",
+          "text": "Limited staff capacity can restrict both measurement and experimentation.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    },
+    {
+      "source_id": "SRC-033",
+      "source_type": "paraphrase_of_analytical_coding_summary",
+      "transcript_verified": false,
+      "evidence": [
+        {
+          "evidence_id": "SRC-033-E01",
+          "text": "Estimation-based sustainability information can be difficult to reconcile with expectations formed in financial accounting.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-033-E02",
+          "text": "Aggregation can obscure areas of poor performance.",
+          "status": "coded_theme_not_independently_verified"
+        },
+        {
+          "evidence_id": "SRC-033-E03",
+          "text": "Returns associated with qualifying capital expenditure were proposed as a possible integrated measure.",
+          "status": "coded_theme_not_independently_verified"
+        }
+      ]
+    }
+  ],
+  "metric_candidates": [
+    {
+      "metric_id": "MET-001",
+      "name": "Water use to EVIC USD in million",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-002",
+      "name": "Total carrying amount of real estate assets by energy efficiency classes",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-003",
+      "name": "Consumption of purchased or acquired electricity, heat, steam, or cooling from fossil sources",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-004",
+      "name": "Fossil Fuel Debt Finance count",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-005",
+      "name": "Significant CapEx for coal/oil/gas-related economic activities",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-006",
+      "name": "Net revenue from customers operating in coal/oil/gas-related activities",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-007",
+      "name": "Potential market size of low-carbon products and services or adaptation solutions to which undertaking has or may have access",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-008",
+      "name": "The price for each metric tonne of greenhouse gas emissions the entity uses to assess the costs of its greenhouse gas emissions",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-009",
+      "name": "Percentage of market-based Scope 2 GHG emissions linked to purchased electricity bundled with instruments",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-010",
+      "name": "Net revenue used to calculate GHG intensity",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-011",
+      "name": "Monetized gross Scope 1 and 2 GHG emissions",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-012",
+      "name": "Downstream scope 3 emissions Investments",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-013",
+      "name": "Percentage of remuneration recognized that is linked to climate-related considerations",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-014",
+      "name": "Expected cost savings from climate change adaptation/mitigation actions",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-015",
+      "name": "Capital deployment—the amount of capital expenditure, financing, or investment deployed towards climate-related risks and opportunities",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-016",
+      "name": "Percentage of net revenue made with products and services that are or that contain substances of concern",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-017",
+      "name": "Operating expenditures (OpEx) in conjunction with major incidents and deposits",
+      "status": "candidate_from_research_workbook_not_validated",
+      "classification_note": "Original coding uses some older categories; no conversion to the current framework is implied."
+    },
+    {
+      "metric_id": "MET-018",
+      "name": "Carbon-adjusted earnings per share",
+      "formula": "[Net income − (GHG emissions × carbon price per tonne CO2e)] / common shares",
+      "status": "candidate_for_review",
+      "note": "Researcher-supplied worked example; classifications remain conditional."
+    },
+    {
+      "metric_id": "MET-019",
+      "name": "Carbon-adjusted total cost of ownership",
+      "formula": null,
+      "status": "candidate_for_review",
+      "note": "Candidate suggested by coded interview material; formula and boundaries require specification."
+    },
+    {
+      "metric_id": "MET-020",
+      "name": "Abatement cost per tonne of CO2e reduced",
+      "formula": null,
+      "status": "candidate_for_review",
+      "note": "Candidate suggested by coded interview material; cost basis, baseline and period require specification."
+    },
+    {
+      "metric_id": "MET-021",
+      "name": "Environmental rehabilitation provisions relative to property, plant and equipment",
+      "formula": null,
+      "status": "candidate_for_review",
+      "note": "Candidate suggested by coded interview material; accounting boundaries require specification."
+    }
+  ]
+}

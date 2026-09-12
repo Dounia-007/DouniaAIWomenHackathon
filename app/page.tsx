@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import AIReview from "./components/AIReview";
 import MetricLab from "./components/MetricLab";
 import FrameworkExplorer from "./components/FrameworkExplorer";
 
@@ -48,7 +49,7 @@ export default function Home() {
           <article className="step-card"><span className="step-number">03</span><span className="step-icon" aria-hidden="true">≡</span><h3>Make room for judgement.</h3><p>Bring the objections and unresolved assumptions into the meeting where humans decide.</p><span className="step-foot">Prepare the conversation</span></article>
         </div></div></section>
         <FrameworkExplorer />
-        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Same metric.<br /><em>Different decisions.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Explore carbon-adjusted EPS, bring an integrated metric, or connect separate measures. Move from nine attributes to potential friction and a focused agenda.</p></div></div><MetricLab /><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
+        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Same metric.<br /><em>Different decisions.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Explore carbon-adjusted EPS, bring an integrated metric, or connect separate measures. Move from nine attributes to potential friction and a focused agenda.</p></div></div><AIReview /><details className="worked-example-toggle"><summary>Explore the worked EPS example and manual worksheets</summary><MetricLab /></details><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
         <section className="closing container"><p className="eyebrow">Our conviction</p><h2>An assessment. A conflict map.<br /><em>The decision stays with you.</em></h2><p>Your nine-attribute assessment leads to a conflict map and a discussion agenda. Evidence informs the interpretation. People decide what to do next.</p><a className="button primary" href="#lab">Start the conversation <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="site-footer container"><a className="brand" href="#"><span className="brand-mark" aria-hidden="true">≋</span>Metric<span className="brand-ai"> Lab</span></a><span>Sustainability. Financial performance. Shared decisions.</span><a href="#">Back to top ↑</a></footer>
