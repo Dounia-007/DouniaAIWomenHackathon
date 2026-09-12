@@ -62,3 +62,7 @@ The result contains nine attribute profiles, three hypothetical role perspective
 Requests and results are not stored by this app. Results have a generation ID and downloadable text export but no persistent history. The AI provider processes submitted text under the account's service terms. Input limits, same-origin checks, a timeout and per-instance throttling are included. The in-memory throttle is not a distributed spending limit; configure platform controls before broad public use.
 
 Validation includes build/type/lint checks, input/origin/unconfigured API checks, and browser tests using a clearly separate fixture for result rendering, evidence display, resolution-to-agenda and export. A fixture does not demonstrate a successful provider call.
+
+## Unified assessment interface
+
+One Assess your metric section now handles custom submissions and the prepared EPS example. Both use the same overview, nine-attribute view, conflict map and downloadable agenda. GET /api/assess checks credential presence before enabling custom input; this is not a provider health or credit check. Provider activation errors disable custom input for that page session. The prepared example is available without credentials and clearly distinguished from AI-generated results.

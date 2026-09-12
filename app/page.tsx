@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import AIReview from "./components/AIReview";
-import MetricLab from "./components/MetricLab";
 import FrameworkExplorer from "./components/FrameworkExplorer";
 
 const perspectives = [
@@ -49,7 +48,7 @@ export default function Home() {
           <article className="step-card"><span className="step-number">03</span><span className="step-icon" aria-hidden="true">≡</span><h3>Prepare to use it.</h3><p>What must you resolve before relying on this metric? Take a focused agenda into the meeting to clarify evidence, responsibilities and decision rules.</p><span className="step-foot">Your output · A discussion agenda</span></article>
         </div></div></section>
         <FrameworkExplorer />
-        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Bring your measures.<br /><em>Examine the connection.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Start with an integrated metric or two separate measures. Get a proposed assessment, explore potential disagreements and prepare your next discussion.</p></div></div><AIReview /><details className="worked-example-toggle"><summary>Explore the worked EPS example and manual worksheets</summary><MetricLab /></details><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
+        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Bring your measures.<br /><em>Examine the connection.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Start with an integrated metric or two separate measures. Get a proposed assessment, explore potential disagreements and prepare your next discussion.</p></div></div><AIReview /><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
         <section className="closing container"><p className="eyebrow">What you take away</p><h2>A clearer view of your metric.<br /><em>A better starting point for action.</em></h2><p>Understand what your metric captures, what it may conceal and what needs resolving before you use it. Your team leaves with an assessment, a potential conflict map and a focused agenda.</p><a className="button primary" href="#lab">Start the conversation <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="site-footer container"><a className="brand" href="#"><span className="brand-mark" aria-hidden="true">≋</span>Metric<span className="brand-ai"> Lab</span></a><span>Sustainability. Financial performance. Shared decisions.</span><a href="#">Back to top ↑</a></footer>
