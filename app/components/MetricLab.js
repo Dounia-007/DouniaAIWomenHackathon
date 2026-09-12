@@ -1,119 +1,78 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
+import { useRef, useState } from "react";
+import { attributes, groups, roles, statuses, examples, blankMetric, makeReview, activeIssues, questionSet, exportAgenda } from "../lib/metric-data";
+
+const tabs = ["Conflict map", "Attribute profile", "Meeting agenda"];
 export default function MetricLab() {
-  const [metric, setMetric] = useState("");
-  const [status, setStatus] = useState("idle");
-
-  const runTest = () => {
-    setStatus("analyzing");
-    setTimeout(() => setStatus("result"), 3000);
-  };
-
-  const matrix = [
-    { label: "Actionability", val: 80, color: "bg-[#d2a06f]" },
-    { label: "Auditability", val: 95, color: "bg-emerald-500" },
-    { label: "Price Sensitivity", val: 45, color: "bg-orange-500" },
-    { label: "Value Link", val: 35, color: "bg-red-500" },
-  ];
-
+  const [reviews, setReviews] = useState(() => Object.fromEntries(examples.map(m => [m.id, makeReview(m)])));
+  const [current, setCurrent] = useState("revenue");
+  const [draft, setDraft] = useState(blankMetric);
+  const [customOpen, setCustomOpen] = useState(false);
+  const [tab, setTab] = useState(0);
+  const [selected, setSelected] = useState("meaning");
+  const [filter, setFilter] = useState("open");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [notice, setNotice] = useState("");
+  const detailRef = useRef(null);
+  const outputRef = useRef(null);
+  const review = reviews[current];
+  const metric = review.metric;
+  const open = activeIssues(review);
+  const issue = review.issues.find(i => i.id === selected) || review.issues[0];
+  const entry = review.entries[issue.id] || {};
+  const shown = review.issues.filter(i => (filter === "all" || (filter === "resolved" ? !!review.entries[i.id]?.resolved : !review.entries[i.id]?.resolved)) && (typeFilter === "all" || (review.entries[i.id]?.type || i.type) === typeFilter));
+  const updateReview = change => setReviews(previous => ({ ...previous, [current]: { ...previous[current], ...change(previous[current]) } }));
+  const updateEntry = (id, change) => updateReview(r => ({ entries: { ...r.entries, [id]: { ...r.entries[id], ...change } } }));
+  function choose(id) { setCurrent(id); setCustomOpen(false); setSelected("meaning"); setFilter("open"); setTypeFilter("all"); setNotice(""); }
+  function selectIssue(id) { setSelected(id); setTab(0); setNotice(""); }
+  function buildCustom(event) {
+    event.preventDefault();
+    if (![draft.name, draft.formula, draft.decision, draft.context].every(v => v.trim())) { setNotice("Please complete the metric name, formula, intended decision and company context."); return; }
+    const clean = Object.fromEntries(Object.entries(draft).map(([k, v]) => [k, typeof v === "string" ? v.trim() : v]));
+    setReviews(prev => ({ ...prev, custom: makeReview(clean) })); setCurrent("custom"); setCustomOpen(false); setTab(0); setSelected("meaning"); setFilter("open"); setTypeFilter("all"); setNotice("Exploratory review created from your inputs. The role questions are rule-based prompts, not predictions.");
+    requestAnimationFrame(() => outputRef.current?.focus());
+  }
+  function exportFile() {
+    const blob = new Blob([exportAgenda(review)], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = "Metric-Lab-Meeting-Agenda.txt"; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); setNotice("Your agenda download includes the metric context, source issues and evidence labels.");
+  }
+  function moveTab(event) {
+    let next = tab;
+    if (event.key === "ArrowRight") next = (tab + 1) % tabs.length;
+    else if (event.key === "ArrowLeft") next = (tab + tabs.length - 1) % tabs.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = tabs.length - 1;
+    else return;
+    event.preventDefault(); setTab(next); document.getElementById(`lab-tab-${next}`)?.focus();
+  }
   return (
-    <div className="bg-[#0a0f1a] border border-white/10 p-8 md:p-16 ai-glow rounded-xl">
-      <AnimatePresence mode="wait">
-        {status === "idle" || status === "analyzing" ? (
-          <motion.div 
-            key="input"
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="max-w-2xl mx-auto space-y-12"
-          >
-            <div className="text-center">
-              <h3 className="text-[#d2a06f] font-mono text-xs uppercase tracking-[0.4em] mb-4">Phase 01: Assembly</h3>
-              <input 
-                className="w-full bg-transparent border-b-2 border-white/20 p-4 text-4xl font-light text-white outline-none focus:border-[#d2a06f] transition-all text-center"
-                placeholder="Enter iKPI Name"
-                value={metric}
-                onChange={(e) => setMetric(e.target.value)}
-              />
-            </div>
-            
-            <button 
-              onClick={runTest}
-              disabled={!metric || status === "analyzing"}
-              className="w-full bg-white text-black font-black py-6 uppercase tracking-[0.3em] text-xs hover:bg-[#d2a06f] transition-colors"
-            >
-              {status === "analyzing" ? "Calculating Conflict Grid..." : "Execute Stress Test"}
-            </button>
-          </motion.div>
-        ) : (
-          <motion.div 
-            key="results"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-16"
-          >
-            {/* 9-Attribute Matrix visualization */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {matrix.map((attr, i) => (
-                <div key={i} className="space-y-3">
-                  <p className="text-[10px] uppercase font-bold text-gray-500">{attr.label}</p>
-                  <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }} 
-                      animate={{ width: `${attr.val}%` }} 
-                      transition={{ duration: 1, delay: i * 0.1 }}
-                      className={`h-full ${attr.color}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-10">
-              <h4 className="text-5xl font-black italic text-white tracking-tighter uppercase">The Conflict Map</h4>
-              <p className="text-[#d2a06f] font-mono text-sm uppercase tracking-widest">{metric}</p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { role: "CFO", risk: "High", text: "Vetoed. Cash-flow delta too high for current WACC." },
-                { role: "CEO", risk: "Med", text: "Stalled. Narrative risk vs current market growth." },
-                { role: "Sustainability", risk: "Low", text: "Approved. Aligns with Science Based Targets." }
-              ].map((p, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 + (i * 0.2) }}
-                  className="p-8 border border-white/5 bg-white/5 hover:bg-white/[0.07] transition-all"
-                >
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-[10px] font-black text-[#d2a06f] tracking-widest">{p.role}</span>
-                    <span className={`text-[9px] px-2 py-0.5 border ${p.risk === 'High' ? 'border-red-500 text-red-500' : 'border-gray-500 text-gray-500'}`}>RISK: {p.risk}</span>
-                  </div>
-                  <p className="text-gray-300 font-serif italic text-sm leading-relaxed">"{p.text}"</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="p-10 bg-[#d2a06f] text-black">
-              <h5 className="font-black uppercase tracking-[0.2em] text-xs mb-4">Consultancy Deliverable: Meeting Agenda</h5>
-              <div className="space-y-2 text-sm leading-relaxed font-bold">
-                <p>1. Align Carbon Proxy data with existing hurdle rates.</p>
-                <p>2. Define the "Profitability Shield" for CapEx overages.</p>
-                <p>3. Negotiate the Audit scope with the Risk Committee.</p>
-              </div>
-            </div>
-            
-            <button 
-              onClick={() => setStatus("idle")}
-              className="text-[10px] font-bold text-gray-600 uppercase tracking-widest hover:text-white"
-            >
-              ← Test New Metric
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="workbench">
+      <div className="candidate-bar"><div className="candidate-bar-title"><span className="round-number">1</span><strong>Choose a metric</strong></div><div className="candidate-pills">{examples.map(m => <button type="button" key={m.id} className={current === m.id && !customOpen ? "active" : ""} aria-pressed={current === m.id && !customOpen} onClick={() => choose(m.id)}>{m.category}</button>)}<button type="button" className={`own-metric ${customOpen || current === "custom" ? "active" : ""}`} onClick={() => { if (reviews.custom && !customOpen) choose("custom"); else setCustomOpen(!customOpen); }} aria-expanded={customOpen}>+ Your own metric</button></div></div>
+      {customOpen && <form className="custom-form" onSubmit={buildCustom}><div className="form-heading"><h3>Bring your own metric.</h3><p>These inputs shape the questions and agenda. This prototype uses explicit rules; interview-based AI is not connected.</p></div><div className="custom-fields">
+        {[['name','Metric name','e.g. Carbon-adjusted operating margin'],['formula','Formula or calculation','Explain what is combined and how'],['decision','Intended decision','What should someone decide using this metric?'],['context','Company and managerial context','Industry, business unit and who can act on the result']].map(([key,label,placeholder]) => <label key={key}>{label}<textarea required rows={key === 'name' ? 1 : 2} maxLength={key === 'name' ? 160 : 1200} value={draft[key]} placeholder={placeholder} onChange={e => setDraft({ ...draft, [key]: e.target.value })} /></label>)}
+        <label>Metric structure<select value={draft.family} onChange={e => setDraft({ ...draft, family: e.target.value })}>{['Not specified','Ratio or intensity','Monetised or adjusted','Other integrated metric'].map(v => <option key={v}>{v}</option>)}</select></label>
+        <label>Evaluation horizon<select value={draft.horizon} onChange={e => setDraft({ ...draft, horizon: e.target.value })}>{['Not specified','Monthly review','Annual review','Three to five years','Project lifetime'].map(v => <option key={v}>{v}</option>)}</select></label>
+        <label className="span-two">What would an improvement mean? <span className="optional">Optional</span><input maxLength={500} value={draft.meaning} onChange={e => setDraft({ ...draft, meaning: e.target.value })} placeholder="What outcome should a better result represent?" /></label>
+      </div>{reviews.custom && <p className="form-warning">Building a new custom review replaces its previous assessments and notes. Download the existing agenda first if you want to keep them.</p>}<div className="form-actions"><button type="submit" className="button primary">Build exploratory review <span aria-hidden="true">↗</span></button><button type="button" className="text-button" onClick={() => setCustomOpen(false)}>Cancel</button><span>Inputs stay in this page. Reloading clears your work.</span></div></form>}
+      <div className="review-overview" ref={outputRef} tabIndex={-1}><div><span className="research-tag">{current === "custom" ? "Your candidate · not validated" : "Illustrative candidate"}</span><h3>{metric.name}</h3><p className="overview-formula">{metric.formula}</p><p>{metric.decision}</p>{current === "custom" && <button type="button" className="text-button" onClick={() => { setDraft(metric); setCustomOpen(true); }}>Edit candidate</button>}</div><div className="review-numbers"><div><strong>{open.length}</strong><span>open issues to explore</span></div><div><strong>9</strong><span>research attributes</span></div><div><strong>3</strong><span>role perspectives</span></div></div></div>
+      <div className="evidence-banner"><span aria-hidden="true">◈</span><p><strong>Know the basis.</strong> {current === "custom" ? "Custom reviews show questions to test with each role, not inferred opinions." : "Example positions are illustrative, not claims about real managers."} No interview evidence or live predictive model is connected. User-entered positions are labelled separately.</p></div>
+      <div className="lab-tabs" role="tablist" aria-label="Review views" onKeyDown={moveTab}>{tabs.map((label,index) => <button type="button" key={label} role="tab" id={`lab-tab-${index}`} aria-controls={`lab-panel-${index}`} aria-selected={tab === index} tabIndex={tab === index ? 0 : -1} onClick={() => { setTab(index); setNotice(""); }}><span className="tab-number">0{index + 1}</span>{label}{index === 2 && <span className="count-pill">{open.length}</span>}</button>)}</div>
+      {notice && <p className="workbench-notice" role="status">{notice}</p>}
+      <section role="tabpanel" id={`lab-panel-${tab}`} aria-labelledby={`lab-tab-${tab}`} className="lab-panel">
+        {tab === 0 && <>
+          <div className="view-intro"><div><h3>Find the point of friction.</h3><p>{current === "custom" ? "Potential differences to investigate, organised by issue." : "Compare the roles across issues, then inspect the assumptions behind each one."}</p></div><span className="prototype-label">Exploratory map</span></div>
+          <div className="map-filters"><div aria-label="Issue resolution filter" className="filter-buttons">{['open','all','resolved'].map(f => <button type="button" key={f} aria-pressed={filter === f} onClick={() => setFilter(f)}>{f === 'open' ? 'Open issues' : f === 'all' ? 'All issues' : 'Resolved'}</button>)}</div><label className="type-filter">Issue type<select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}><option value="all">All types</option>{statuses.map(s => <option key={s}>{s}</option>)}</select></label></div>
+          <div className="map-scroll" tabIndex={0} role="region" aria-label="Role comparison table; scroll horizontally on small screens"><table className="conflict-table"><caption className="sr-only">Potential differences by issue and role. Select an issue to inspect it.</caption><thead><tr><th scope="col">Point to resolve</th>{roles.map((role,i) => <th scope="col" key={role}><span className={`role-dot role-dot-${i}`} />{role}</th>)}</tr></thead><tbody>{shown.map(i => { const e = review.entries[i.id] || {}; return <tr key={i.id} className={`${issue.id === i.id ? 'selected-row' : ''} ${e.resolved ? 'resolved-row' : ''}`}><th scope="row"><button type="button" aria-pressed={issue.id === i.id} onClick={() => { selectIssue(i.id); requestAnimationFrame(() => detailRef.current?.focus()); }}>{i.title}<span aria-hidden="true">↗</span></button><span className={`issue-status status-${statuses.indexOf(e.type || i.type)}`}>{e.resolved ? "Resolved by you" : e.type || i.type}</span></th>{roles.map((role,index) => <td key={role}><p>{e.positions?.[index] ?? i.positions[index]}</p><small>{e.positions?.[index] !== undefined ? "User-entered position" : i.evidence}</small></td>)}</tr>; })}</tbody></table>{shown.length === 0 && <p className="empty-message">No issues match this filter. Choose “All issues” or a different type.</p>}</div>
+          <article className="issue-detail" ref={detailRef} tabIndex={-1}><div className="issue-detail-header"><div><p className="eyebrow">Selected issue</p><h3>{issue.title}</h3></div><label>Working classification<select value={entry.type || issue.type} onChange={e => updateEntry(issue.id, { type: e.target.value })}>{statuses.map(s => <option key={s}>{s}</option>)}</select></label></div><div className="detail-columns"><div><h4>Why this could matter</h4><p>{issue.consequence}</p><h4>Condition for moving forward</h4><p>{issue.output}</p><div className="dimension-tags">{issue.attrs.map(id => <button type="button" key={id} onClick={() => { setTab(1); requestAnimationFrame(() => document.getElementById(`profile-${id}`)?.focus()); }}>{attributes.find(a => a.id === id).name} ↗</button>)}</div></div><div className="basis-card"><span className="research-tag">{issue.evidence}</span><h4>Why this issue appears</h4><p>{issue.why}</p><p className="small-copy">The role labels organise a discussion. They do not establish anyone’s actual position.</p></div></div>
+          <details className="record-positions"><summary>Record what the actual participants say</summary><p>Replace the sample with a position supplied by a participant. This is a user record, not independently verified evidence.</p><div className="position-fields">{roles.map((role,index) => <label key={role}>{role}<textarea rows={3} maxLength={1200} value={entry.positions?.[index] ?? ""} placeholder={issue.positions[index]} onChange={e => updateEntry(issue.id, { positions: { ...entry.positions, [index]: e.target.value } })} /></label>)}</div></details>
+          <label className="resolution-label" htmlFor="issue-note">Assumptions, evidence to request, or agreed resolution<textarea id="issue-note" rows={3} maxLength={2400} value={entry.note || ""} placeholder="Record what needs to be clarified, or what the participants have agreed." onChange={e => updateEntry(issue.id, { note: e.target.value, resolved: e.target.value.trim() ? entry.resolved : false })} /></label><div className="resolution-actions"><label><input type="checkbox" checked={!!entry.resolved} disabled={!entry.note?.trim()} onChange={e => updateEntry(issue.id, { resolved: e.target.checked })} />Mark resolved in this review</label><span>{entry.resolved ? 'This issue is removed from the open agenda. Your note remains recorded.' : 'Add a note before marking resolved. This records your judgement, not validation.'}</span></div></article>
+          <div className="assumption-section"><div><p className="eyebrow">Follow the assumptions</p><h3>Three questions to take further.</h3><p>Selected from the metric’s structure and context.</p></div><div className="assumption-cards">{questionSet(review).map(q => <button type="button" key={q.id} onClick={() => { selectIssue(q.id); requestAnimationFrame(() => detailRef.current?.focus()); }}><span>{q.attribute}</span><strong>{q.question}</strong><small>Inspect linked issue ↗</small></button>)}</div></div>
+        </>}
+        {tab === 1 && <><div className="view-intro"><div><h3>Examine the metric’s construction.</h3><p>Make a working assessment, explain it, and leave unknowns unassessed. There is no overall score.</p></div><span className="prototype-label">Framework supplied by researcher</span></div><p className="profile-note">{current === 'custom' ? 'Your candidate starts unassessed.' : 'Some categorical selections are illustrative starting points.'} High, medium and low are relative descriptions within an attribute. No calibrated cut-offs or automatic credibility judgement are implied.</p>{groups.map((group,groupIndex) => <div className="profile-group" key={group}><h3><span className={`group-dot group-${groupIndex}`} />{group}</h3><div className="profile-grid">{attributes.filter(a => a.group === groupIndex).map(a => <article key={a.id} className="profile-card" tabIndex={-1} id={`profile-${a.id}`}><div className="profile-card-heading"><h4>{a.name}</h4><span>{review.editedRatings[a.id] ? "Your assessment" : current === 'custom' ? 'Not assessed' : 'Working example'}</span></div><p>{a.definition}</p><details><summary>Definitions and questions</summary><p>{a.detail}</p>{a.questions.map(q => <p className="attribute-question" key={q}>{q}</p>)}</details>{a.dimensions.map((d,index) => <label key={d.name}>{d.name}<select value={review.ratings[a.id][index]} onChange={e => updateReview(r => ({ ratings: { ...r.ratings, [a.id]: r.ratings[a.id].map((v,ix) => ix === index ? e.target.value : v) }, editedRatings: { ...r.editedRatings, [a.id]: true } }))}>{d.options.map(v => <option key={v}>{v}</option>)}</select></label>)}<label>Rationale or evidence needed<textarea rows={2} maxLength={1500} value={review.notes[a.id] || ''} onChange={e => updateReview(r => ({ notes: { ...r.notes, [a.id]: e.target.value } }))} placeholder="Why is this classification appropriate?" /></label><small>Supplied references · {a.reference}</small></article>)}</div></div>)}<p className="profile-note">Profile edits are recorded in the agenda export. They do not automatically establish role disagreement. Use the conflict map to examine and document that connection.</p></>}
+        {tab === 2 && <><div className="view-intro"><div><h3>The agenda follows the issues.</h3><p>{open.length} open {open.length === 1 ? 'issue' : 'issues'} for “{metric.name}”. Each item is traceable to a point in the map.</p></div><button type="button" className="button primary" onClick={exportFile}>Download agenda ↓</button></div>{open.length === 0 ? <div className="empty-message"><h4>All recorded issues have been marked resolved.</h4><p>This records your review decisions. It does not validate the metric or predict agreement.</p></div> : <div className="agenda-list">{open.map((i,index) => <article className="agenda-item" key={i.id}><span className="agenda-index">{String(index+1).padStart(2,'0')}</span><div><span className="issue-status">{review.entries[i.id]?.type || i.type}</span><h4>{i.question}</h4><p><strong>Leave the meeting with</strong> {i.output}</p><p><strong>Suggested participants</strong> {i.owner}</p>{review.entries[i.id]?.note && <p className="agenda-user-note"><strong>Your note</strong> {review.entries[i.id].note}</p>}<button type="button" className="text-button" onClick={() => selectIssue(i.id)}>Source issue · {i.title} ↗</button><small>{i.evidence} · participant ownership requires confirmation</small></div></article>)}</div>}<div className="agenda-footer"><p>The agenda reflects unresolved issues, not a recommendation to approve or reject the metric. Download it to keep your work before reloading.</p><button type="button" className="text-button" onClick={() => { setTab(0); setFilter('resolved'); }}>View resolved issues ({review.issues.length-open.length})</button></div></>}
+      </section>
+      <div className="workbench-footer"><span>Framework-led exploration · no live AI · no connected interview evidence</span><span>Page-local session · download to keep your work</span></div>
     </div>
   );
 }
