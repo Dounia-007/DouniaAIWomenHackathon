@@ -1,3 +1,4 @@
+import { explainAIError } from '../../lib/server/ai-error.mjs';
 import { ToolLoopAgent, Output, jsonSchema } from 'ai';
 import { assessmentSchema, validAssessment, instructions, sourceMap } from '../../lib/server/assessment';
 export const runtime='nodejs';
@@ -22,9 +23,7 @@ export async function POST(request){
  const ids=new Set([...Object.values(result.output.attributes).flatMap(a=>a.evidenceIds),...result.output.conflicts.flatMap(c=>c.evidenceIds)]);
  return Response.json({assessment:result.output,sources:Object.fromEntries([...ids].map(id=>[id,sourceMap[id]])),generationId:crypto.randomUUID(),generatedAt:new Date().toISOString(),model,evidenceVersion:'deidentified-33-sources-99-themes-v1'},{headers:{'Cache-Control':'no-store'}});
  }catch(error){
- const status=error?.statusCode;
- const setup=[401,402,403].includes(status);
- const setupMessage=status===402?'The AI provider reports a billing or credit problem. The site owner needs to check AI Gateway usage and billing.':status===401?'The AI provider rejected the credential. The site owner needs to check the server-side AI Gateway key and redeploy.':'The AI provider denied access. The site owner needs to check the gateway account and model permissions.';
- return Response.json({error:setup?setupMessage:'The AI assessment could not be completed. Please retry or add the formula and decision context.',code:setup?'AI_SETUP_REQUIRED':'ASSESSMENT_FAILED'},{status:setup?503:502});
+ const failure=explainAIError(error,!!process.env.AI_GATEWAY_API_KEY);
+ return Response.json(failure,{status:failure.code==='AI_SETUP_REQUIRED'?503:502});
  }
 }

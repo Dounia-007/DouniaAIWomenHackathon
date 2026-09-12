@@ -89,3 +89,5 @@ Activate and test the AI provider, evaluate generated assessments against resear
 ## Follow-up fix for disabled custom input
 
 The activation preflight previously disabled the entire form. A subsequent fix keeps fields editable, allows POST to retry independently of the preflight, and preserves entries and previous results on failure. Server errors distinguish missing credentials, provider authentication, billing and access failures. The production build and lint passed; browser checks confirmed typing without credentials, entry retention after a real local 503 and rendering a mocked successful response after a failed preflight. Live provider access remains unverified because the Vercel connection returns 403.
+
+A further diagnostic update adds fixed error categories and an ML-D2 code, including nested SDK errors and unrecognized 403 responses. It excludes raw error bodies, prompts and credentials, and hides the duplicate banner when an error is shown. Classification and sensitive-content exclusion checks passed alongside the build. Provider access remains unresolved pending a deployed diagnostic.
