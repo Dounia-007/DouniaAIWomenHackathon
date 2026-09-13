@@ -158,4 +158,6 @@ GitHub records commits made through the connected account under `Dounia-007`. Th
 
 ## Jury demonstration
 
-Enter `Energy consumption per revenue` in the existing-iKPI form (or use the prepared-demonstration shortcut), then select Assess my metric. This exact named example returns a fixed, labelled prepared demonstration without a provider request. It includes nine proposed classifications, illustrative role feedback, three proposed resolutions and an agenda. Optional company feedback is displayed and downloaded as supplied, not analysed. Other metric names continue to use the custom AI route. The EPS conflict map also displays attribute badges and role prompts with proposed resolutions.
+Enter `Energy consumption per revenue` in the existing-iKPI form then select Assess my metric. This exact named example returns a fixed response labelled Example assessment without a provider request. It includes nine proposed classifications, illustrative role feedback, three proposed resolutions and an agenda. Optional company feedback is displayed and downloaded as supplied, not analysed. Other metric names continue to use the custom AI route. The EPS conflict map also displays attribute badges and role prompts with proposed resolutions.
+
+The energy result reuses the EPS section, attribute-card, feedback-box and agenda styles. The input form has no demonstration suggestion or shortcut. The fixed-response explanation appears in the result’s expandable Research evidence and limits section and remains in its download.
