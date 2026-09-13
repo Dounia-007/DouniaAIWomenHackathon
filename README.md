@@ -155,3 +155,7 @@ GitHub records commits made through the connected account under `Dounia-007`. Th
 4. Open a potential conflict, record a resolution and show the resulting agenda.
 5. Download the assessment.
 6. Demonstrate a custom AI assessment only after activation and a successful live test. Clearly distinguish its proposals from the prepared researcher baseline.
+
+## Jury demonstration
+
+Enter `Energy consumption per revenue` in the existing-iKPI form (or use the prepared-demonstration shortcut), then select Assess my metric. This exact named example returns a fixed, labelled prepared demonstration without a provider request. It includes nine proposed classifications, illustrative role feedback, three proposed resolutions and an agenda. Optional company feedback is displayed and downloaded as supplied, not analysed. Other metric names continue to use the custom AI route. The EPS conflict map also displays attribute badges and role prompts with proposed resolutions.
