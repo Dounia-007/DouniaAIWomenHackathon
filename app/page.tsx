@@ -5,9 +5,9 @@ import PreparedReview from "./components/PreparedReview";
 import FrameworkExplorer from "./components/FrameworkExplorer";
 
 const perspectives = [
-  { name: "CEO", question: "Does this change the investment case?", detail: "Margin · Return on capital · Payback", tag: "A strategic perspective" },
-  { name: "Sustainability", question: "Does this improve the actual impact?", detail: "Emissions · Energy · Resource use", tag: "An impact lens" },
-  { name: "Operations", question: "What can my team do differently?", detail: "Processes · Resources · Delivery", tag: "An operational lens" },
+  { name: "CFO", question: "Does this change the investment case?", detail: "Margin · Return on capital · Payback", tag: "A strategic perspective" },
+  { name: "Sustainability manager", question: "Does this improve the actual impact?", detail: "Emissions · Energy · Resource use", tag: "An impact lens" },
+  { name: "Business", question: "What can my team do differently?", detail: "Processes · Resources · Delivery", tag: "An operational lens" },
 ];
 
 export default function Home() {
@@ -48,7 +48,7 @@ export default function Home() {
           <article className="step-card"><span className="step-number">03</span><span className="step-icon" aria-hidden="true">≡</span><h3>Prepare to use it.</h3><p>What must you resolve before relying on this metric? Take a focused agenda into the meeting to clarify evidence, responsibilities and decision rules.</p><span className="step-foot">Your output · A discussion agenda</span></article>
         </div></div></section>
         <FrameworkExplorer />
-        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Bring your measures.<br /><em>Examine the connection.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Explore carbon-adjusted EPS. Change what its carbon price represents, inspect the nine-attribute baseline and build a focused agenda.</p></div></div><PreparedReview /><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
+        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Bring your measures.<br /><em>Examine the connection.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Assess your own metric with feedback from your team. For guidance, explore the worked example below.</p></div></div><PreparedReview /><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
         <section className="closing container"><p className="eyebrow">What you take away</p><h2>A clearer view of your metric.<br /><em>A better starting point for action.</em></h2><p>Understand what your metric captures, what it may conceal and what needs resolving before you use it. Your team leaves with an assessment, a potential conflict map and a focused agenda.</p><a className="button primary" href="#lab">Start the conversation <span aria-hidden="true">↗</span></a></section>
       </main>
       <footer className="site-footer container"><a className="brand" href="#"><span className="brand-mark" aria-hidden="true">≋</span>Metric<span className="brand-ai"> Lab</span></a><span>Sustainability. Financial performance. Shared decisions.</span><a href="#">Back to top ↑</a></footer>

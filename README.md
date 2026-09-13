@@ -15,7 +15,9 @@ At the time of this documentation, the implementation is on `design/metric-lab-f
 
 ## Prepared scenario review
 
-The lab now opens directly on carbon-adjusted EPS. Three prepared carbon-price interpretations expose scenario-specific questions while retaining the nine researcher baseline classifications. Optional role prompts are secondary to evidence and decision consequences. Resolutions and notes are separate for each scenario, and a downloadable review includes the open agenda. Scenario extensions await researcher review and do not cite interview evidence. Custom AI remains available in an expandable section.
+The friction lab opens with custom assessment and three optional fields for existing feedback from the CFO, sustainability manager and operations department. The server supplies that feedback alongside the research package and asks the agent to distinguish reported comments from inferred perspectives when proposing next steps. Research evidence and limits follow in an expandable section, then the prepared carbon-adjusted EPS example provides guidance. The example names the selected carbon-price interpretation and explains the relevance of conflict-map attributes.
+
+Company profiles, authenticated assessment history and durable storage are a later phase. Current entries and results remain page-local; assessment downloads include the feedback submitted with that assessment. Live provider access remains unresolved.
 
 ## The problem
 
