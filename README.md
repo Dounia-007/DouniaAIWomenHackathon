@@ -11,13 +11,13 @@ Metric Lab is a research-informed prototype developed by Dounia Chlyeh with Chat
 - [Implementation pull request](https://github.com/Dounia-007/DouniaAIWomenHackathon/pull/1)
 - [Development history and contributions](https://github.com/Dounia-007/DouniaAIWomenHackathon/blob/design/metric-lab-framework/docs/DEVELOPMENT_HISTORY.md)
 
-**Review the `design/metric-lab-framework` branch for the current application.** The default `main` branch contains this submission guide but has not been brought up to date with the application changes. The latest interface deployment was reported successful by Vercel for [commit 2503d65](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/2503d65195daffd51008c405701d7e6b3b8ad689).
+**Review the `design/metric-lab-framework` branch for the current application.** The default `main` branch contains this submission guide but has not been brought up to date with the application changes. The latest interface deployment was reported successful by Vercel for [commit d89057f](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/d89057fb9b10d2373bf50885b2db23f16ea53fe7).
 
 ## The problem
 
 Companies can track sustainability and financial performance separately while making decisions that depend on both. Combining two numbers does not, by itself, establish that the resulting metric is meaningful.
 
-A CFO, sustainability manager and Business may interpret the same indicator differently. Its assumptions, measurement boundaries and allocation of responsibility need examination before it guides action.
+The CFO, sustainability manager and business team may interpret the same indicator differently. Its assumptions, measurement boundaries and allocation of responsibility need examination before it guides action.
 
 ## What the website does
 
@@ -28,7 +28,7 @@ The website introduces the decision gap, explains the research framework and ope
 3. Examine the resulting assessment, potential conflicts and agenda.
 4. Record evidence, agreement or a resolution. Resolved issues leave the open agenda; notes remain in the download.
 
-The introductory decision-gap card uses CFO, Sustainability manager and Business. The assessment feedback fields use CFO, Sustainability manager and Business.
+The three role labels are consistent across the decision-gap card, assessment, examples and downloads: CFO, Sustainability manager and Business. The existing Metric Lab logo is retained.
 
 Research evidence and limits follow the form in an expandable section. A carbon-adjusted earnings-per-share example appears last as a guide. The energy example uses the same colours, attribute cards, feedback boxes and four-stage layout.
 
@@ -54,7 +54,7 @@ The example includes:
 - Energy consumption in MWh divided by revenue in € million. An illustrative calculation uses 12,000 MWh and €60 million, giving 200 MWh per € million.
 - Nine proposed classifications with conditions.
 - Three potential issues concerning interpretation of improvement, accountability and data comparability.
-- Illustrative CFO, sustainability manager and operations feedback.
+- Illustrative feedback from the CFO, sustainability manager and Business.
 - Proposed resolutions, agenda items, proposed leads and expected meeting outputs.
 - Editable resolution notes and an assessment download.
 
@@ -105,7 +105,8 @@ The configured-connection banner indicates credential presence, not a successful
 | Metric entry and three optional feedback fields | Implemented |
 | Prepared energy and EPS assessments | Implemented; user confirmed the energy flow works |
 | Grey attribute badges, role boxes and proposed resolutions | Implemented |
-| Resolution-linked agenda and downloads | Implemented |
+| Resolution-linked agenda and styled HTML downloads | Implemented for both examples and the custom-result path |
+| Report escaping, open/resolved counts and note retention | Checked locally |
 | Live AI request, research context and response validation | Implemented; provider access unresolved |
 | Production build, TypeScript and ESLint | Passed for the latest interface changes |
 | Energy-name matching, nine attributes and three conflicts | Checked locally |
@@ -154,6 +155,7 @@ The stack is Next.js 16, React 19, TypeScript/JavaScript, CSS/Tailwind tooling a
 | `app/lib/server/assessment.js` | Agent instructions, schema and validation |
 | `app/lib/server/evidence.json` | De-identified evidence derivative and candidate catalogue |
 | `app/lib/server/ai-error.mjs` | Fixed diagnostic categories without exposing raw provider content |
+| `app/lib/download-report.js` | Shared HTML report layout, escaped text and download generation |
 | `app/globals.css` | Shared visual styles and responsive layouts |
 
 Earlier manual components remain in source but are not rendered in the current journey.
