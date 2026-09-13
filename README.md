@@ -17,18 +17,18 @@ Metric Lab is a research-informed prototype developed by Dounia Chlyeh with Chat
 
 Companies can track sustainability and financial performance separately while making decisions that depend on both. Combining two numbers does not, by itself, establish that the resulting metric is meaningful.
 
-A CFO, sustainability manager and operations department may interpret the same indicator differently. Its assumptions, measurement boundaries and allocation of responsibility need examination before it guides action.
+A CFO, sustainability manager and Business may interpret the same indicator differently. Its assumptions, measurement boundaries and allocation of responsibility need examination before it guides action.
 
 ## What the website does
 
 The website introduces the decision gap, explains the research framework and opens the friction lab with **Assess your metric**.
 
 1. Enter an existing iKPI and its formula, if known, or separate financial and sustainability measures.
-2. Optionally add feedback already received from the CFO, sustainability manager and operations department in three separate boxes.
+2. Optionally add feedback already received from the CFO, sustainability manager and Business in three separate boxes.
 3. Examine the resulting assessment, potential conflicts and agenda.
 4. Record evidence, agreement or a resolution. Resolved issues leave the open agenda; notes remain in the download.
 
-The introductory decision-gap card uses CFO, Sustainability manager and Business. The assessment feedback fields use CFO, Sustainability manager and Operations department.
+The introductory decision-gap card uses CFO, Sustainability manager and Business. The assessment feedback fields use CFO, Sustainability manager and Business.
 
 Research evidence and limits follow the form in an expandable section. A carbon-adjusted earnings-per-share example appears last as a guide. The energy example uses the same colours, attribute cards, feedback boxes and four-stage layout.
 
@@ -171,3 +171,7 @@ Input limits, same-origin checks, timeout and per-instance throttling are implem
 Dounia developed the research concept and framework, supplied research materials and EPS classifications, directed the product, selected role perspectives and approved the energy example and interface changes. ChatGPT/Codex assisted with design, implementation, selective evidence paraphrasing, drafting the energy case, checks and documentation.
 
 The project evolved from a dense workbench into an assessment-first journey with optional company feedback, expandable research limits, visible conflict-to-agenda connections and two working prepared cases. GitHub attribution under `Dounia-007` does not imply that the code was written without AI assistance. See the [development history](https://github.com/Dounia-007/DouniaAIWomenHackathon/blob/design/metric-lab-framework/docs/DEVELOPMENT_HISTORY.md) for milestones and verification limits.
+
+## Report downloads
+
+All current assessment downloads use a styled, self-contained HTML report instead of plain text. Reports include the open agenda first, recorded resolutions, attribute cards, company feedback where supplied, role perspectives, proposed outcomes and research limits. Open the file in a browser and use Print → Save as PDF for a PDF copy. The report escapes company input and generated text. Business is now the third role across the form, prepared cases, AI instructions and report labels.

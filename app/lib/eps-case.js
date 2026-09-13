@@ -1,4 +1,4 @@
-export const reviewRoles = ['CFO', 'Sustainability manager', 'Operations department'];
+export const reviewRoles = ['CFO', 'Sustainability manager', 'Business'];
 export const eps = {
   name: 'Carbon-adjusted earnings per share',
   formula: '[Net income − (Total GHG emissions × Carbon price per tonne CO₂e)] ÷ Total number of common shares',

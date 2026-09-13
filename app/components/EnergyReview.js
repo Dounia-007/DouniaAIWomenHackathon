@@ -1,6 +1,6 @@
 'use client';
 import {attributes} from '../lib/metric-data';
-const roles=[['cfo','CFO'],['sustainability','Sustainability manager'],['operations','Operations department']];
+const roles=[['cfo','CFO'],['sustainability','Sustainability manager'],['operations','Business']];
 export default function EnergyReview({result,resolved,setResolved,onDownload}){
  const a=result.assessment;
  return <div className="prepared-review energy-review">
