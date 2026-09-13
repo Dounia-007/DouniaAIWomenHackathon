@@ -106,7 +106,7 @@ The later revisions below supersede earlier descriptions of the entry order, rol
 | [5582e40](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/5582e40dbfdcfcd24905eb2c76d332d3db1f6948) | Added the approved fixed energy-consumption-per-revenue assessment, grey attribute badges, visible role feedback, proposed resolutions and agenda links |
 | [2503d65](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/2503d65195daffd51008c405701d7e6b3b8ad689) | Matched energy output to the EPS four-stage layout; removed example input instructions; retained a small Example assessment label and expandable explanation |
 
-The decision-gap card now uses CFO, Sustainability manager and Business. The feedback fields and assessment use CFO, Sustainability manager and Operations department. The lab opens with the form, then expandable research evidence and limits, followed by the EPS guide. The previous development-contribution section was removed from the website; attribution remains in repository documentation.
+The decision-gap card now uses CFO, Sustainability manager and Business. At this stage the feedback fields used Operations department; the final revision below changes this to Business. The lab opens with the form, then expandable research evidence and limits, followed by the EPS guide. The previous development-contribution section was removed from the website; attribution remains in repository documentation.
 
 Dounia approved the proposed energy example before implementation. Entering Energy consumption per revenue in existing-iKPI mode returns fixed content locally without a provider call. It includes nine conditional classifications, illustrative role feedback, proposed resolutions and agenda items. Company feedback is retained and downloaded as supplied, not analysed or used to modify the fixed example. A resolution note and checkbox remove an issue from the open agenda while preserving the note in the download. Profiles, authentication and durable history remain planned.
 
@@ -115,3 +115,11 @@ Gateway troubleshooting established that failing requests were recorded as HTTP 
 Latest source changes passed production builds, TypeScript and lint. The energy matcher and completeness of its nine attributes and three conflicts were checked locally. Attempts to automate the latest browser journey failed because of the local Chromium environment; those attempts are not passing end-to-end checks. The user confirmed the energy interaction worked before the final layout adjustment. Vercel reported success for the latest layout commit, 2503d65.
 
 The submission README was rewritten on both the implementation branch and main so the repository landing page directs reviewers to the current source and preview. This documentation update does not merge the application into main.
+
+## Final role and report revision
+
+[Commit d89057f](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/d89057fb9b10d2373bf50885b2db23f16ea53fe7) implements the final requested role labels and report design. The existing Metric Lab logo was retained after logo exploration. Business replaces Operations department in current role labels, prepared cases, model instructions and report output.
+
+Plain-text downloads were replaced with self-contained HTML reports using navy and orange styling. The open agenda appears first, followed by recorded resolutions, nine-attribute cards, supplied feedback where available, role perspectives, proposed resolutions and research limits. The same exporter serves EPS, energy and custom AI results. Reports include print styling; users can open them in a browser and select Print → Save as PDF. Direct PDF generation is not implemented.
+
+Production build, TypeScript and lint passed. Local report checks confirmed HTML escaping of supplied text, correct open/resolved counts, and retention of feedback and notes. No visual browser or PDF-render verification is claimed for this final exporter. Vercel reported a successful deployment for d89057f. The README on main and the implementation branch was updated to describe these changes and point jurors to the current source.
