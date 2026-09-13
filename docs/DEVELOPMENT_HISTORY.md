@@ -21,7 +21,7 @@ An existing Next.js/React repository and Vercel project were provided. The initi
 | 9 | Simplify after user feedback | Replaced dense first-screen controls with a guided review and expandable detail |
 | 10 | Define two entry routes | Supported an existing integrated metric or separate financial and sustainability measures |
 | 11 | Specify the first worked case | Dounia supplied carbon-adjusted EPS and conditional classifications; parentheses were added so the carbon cost is deducted before division by shares |
-| 12 | Compare three managerial perspectives | Adopted the latest requested roles: CEO, sustainability manager and operational manager. Earlier prototypes had used CFO |
+| 12 | Compare three managerial perspectives | At this stage, adopted CEO, sustainability manager and operational manager; the September 13 revision below supersedes these role labels |
 | 13 | Inspect research uploads | Read the workbook with 17 candidate columns, the typology manuscript and 33 Word coding-summary documents in a ZIP |
 | 14 | Identify research-version differences | The workbook contained older complexity and transparency categories; automatic transfer to current classification rules was not performed |
 | 15 | Identify potential additional cases | Found coding themes concerning carbon-adjusted total cost of ownership, abatement cost per tonne and rehabilitation provisions relative to assets |
@@ -95,3 +95,23 @@ A further diagnostic update adds fixed error categories and an ML-D2 code, inclu
 ## Prepared scenario journey
 
 User feedback questioned the value of three simulated role opinions. The revised page prioritises decision consequences, assumptions and evidence gaps, with optional participant prompts. Three carbon-price interpretations preserve the researcher baseline and label scenario implications as proposals awaiting review. The website now includes a clearer problem statement, research limitations and contribution account. Browser checks passed for all nine cards, scenario switching, retained notes, resolutions, agenda export and desktop/mobile overflow. The build and type checks passed; live AI remains inactive.
+
+## September 13 submission update
+
+The later revisions below supersede earlier descriptions of the entry order, role labels and prominence of role prompts. Historical sections above describe earlier iterations, not the final interface.
+
+| Commit | Change |
+| --- | --- |
+| [ca42d79](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/ca42d79f71e00a605574e4fb784119a6093301b0) | Put assessment first; replaced decision context with three optional company-feedback fields; changed CEO to CFO; clarified interpretation notes and conflict attributes |
+| [5582e40](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/5582e40dbfdcfcd24905eb2c76d332d3db1f6948) | Added the approved fixed energy-consumption-per-revenue assessment, grey attribute badges, visible role feedback, proposed resolutions and agenda links |
+| [2503d65](https://github.com/Dounia-007/DouniaAIWomenHackathon/commit/2503d65195daffd51008c405701d7e6b3b8ad689) | Matched energy output to the EPS four-stage layout; removed example input instructions; retained a small Example assessment label and expandable explanation |
+
+The decision-gap card now uses CFO, Sustainability manager and Business. The feedback fields and assessment use CFO, Sustainability manager and Operations department. The lab opens with the form, then expandable research evidence and limits, followed by the EPS guide. The previous development-contribution section was removed from the website; attribution remains in repository documentation.
+
+Dounia approved the proposed energy example before implementation. Entering Energy consumption per revenue in existing-iKPI mode returns fixed content locally without a provider call. It includes nine conditional classifications, illustrative role feedback, proposed resolutions and agenda items. Company feedback is retained and downloaded as supplied, not analysed or used to modify the fixed example. A resolution note and checkbox remove an issue from the open agenda while preserving the note in the download. Profiles, authentication and durable history remain planned.
+
+Gateway troubleshooting established that failing requests were recorded as HTTP 403 with Azure as provider for GPT-6 Astra. The user reported a valid payment method, but the exact denial reason was not established. A support message was drafted; no support response or successful live inference has been verified. Key presence is not proof of working model access.
+
+Latest source changes passed production builds, TypeScript and lint. The energy matcher and completeness of its nine attributes and three conflicts were checked locally. Attempts to automate the latest browser journey failed because of the local Chromium environment; those attempts are not passing end-to-end checks. The user confirmed the energy interaction worked before the final layout adjustment. Vercel reported success for the latest layout commit, 2503d65.
+
+The submission README was rewritten on both the implementation branch and main so the repository landing page directs reviewers to the current source and preview. This documentation update does not merge the application into main.
