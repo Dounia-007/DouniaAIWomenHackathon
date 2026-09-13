@@ -1,3 +1,4 @@
+import {createReportPDF} from './report-pdf';
 // Escape all company input and generated prose before inserting it into a document.
 export const escapeReportText=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const e=escapeReportText;
@@ -19,6 +20,5 @@ export function renderReport({name,summary,formula,notice,attributes=[],feedback
  <section><h2>Research evidence and limits</h2><div class="notice">${paragraph(notice)}</div>${sources.map(source=>`<div class="detail"><h4>${e(source.id)}</h4>${paragraph(source.text)}</div>`).join('')}</section><footer>Metric Lab · ${e(new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long',day:'numeric'}))}${metadata.map(item=>paragraph(item)).join('')}</footer></main></body></html>`;
 }
 export function downloadReport(report,filename){
- const url=URL.createObjectURL(new Blob([renderReport(report)],{type:'text/html;charset=utf-8'}));
- const link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ createReportPDF(report).save(filename.replace(/\.(html|txt|md)$/i,'')+'.pdf');
 }
