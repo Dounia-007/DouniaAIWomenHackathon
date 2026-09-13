@@ -13,6 +13,10 @@ Metric Lab is a research-grounded prototype developed by Dounia Chlyeh with AI-a
 
 At the time of this documentation, the implementation is on `design/metric-lab-framework`. The pull request is open and has not been merged into `main`. Review the branch linked above when judging this submission.
 
+## Prepared scenario review
+
+The lab now opens directly on carbon-adjusted EPS. Three prepared carbon-price interpretations expose scenario-specific questions while retaining the nine researcher baseline classifications. Optional role prompts are secondary to evidence and decision consequences. Resolutions and notes are separate for each scenario, and a downloadable review includes the open agenda. Scenario extensions await researcher review and do not cite interview evidence. Custom AI remains available in an expandable section.
+
 ## The problem
 
 Companies may measure sustainability and financial performance separately while making decisions that depend on both. Sustainability information can remain in disclosure while financial indicators guide resource allocation.
@@ -114,6 +118,7 @@ Vercel OIDC is also supported when present. Secrets are read on the server and m
 | --- | --- |
 | `app/page.tsx` | Product story and page composition |
 | `app/components/FrameworkExplorer.js` | Research framework explanation |
+| `app/components/PreparedReview.js` | Prepared EPS scenarios, baseline, issues and agenda |
 | `app/components/AIReview.js` | Unified input, prepared example, generated results and downloads |
 | `app/api/assess/route.js` | Credential check, input checks and server-side model request |
 | `app/lib/server/assessment.js` | Model instructions, response schema and validation |
