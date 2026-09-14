@@ -1,119 +1,65 @@
 "use client";
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
+import { useRef, useState } from 'react';
+import { attributes } from '../lib/metric-data';
+import { eps, epsProfile, epsIssues, reviewRoles, integrationChecks, worksheetIssues } from '../lib/eps-case';
+const blank = { name:'', formula:'', sustainability:'', financial:'', decision:'', context:'' };
 export default function MetricLab() {
-  const [metric, setMetric] = useState("");
-  const [status, setStatus] = useState("idle");
-
-  const runTest = () => {
-    setStatus("analyzing");
-    setTimeout(() => setStatus("result"), 3000);
-  };
-
-  const matrix = [
-    { label: "Actionability", val: 80, color: "bg-[#d2a06f]" },
-    { label: "Auditability", val: 95, color: "bg-emerald-500" },
-    { label: "Price Sensitivity", val: 45, color: "bg-orange-500" },
-    { label: "Value Link", val: 35, color: "bg-red-500" },
-  ];
-
-  return (
-    <div className="bg-[#0a0f1a] border border-white/10 p-8 md:p-16 ai-glow rounded-xl">
-      <AnimatePresence mode="wait">
-        {status === "idle" || status === "analyzing" ? (
-          <motion.div 
-            key="input"
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="max-w-2xl mx-auto space-y-12"
-          >
-            <div className="text-center">
-              <h3 className="text-[#d2a06f] font-mono text-xs uppercase tracking-[0.4em] mb-4">Phase 01: Assembly</h3>
-              <input 
-                className="w-full bg-transparent border-b-2 border-white/20 p-4 text-4xl font-light text-white outline-none focus:border-[#d2a06f] transition-all text-center"
-                placeholder="Enter iKPI Name"
-                value={metric}
-                onChange={(e) => setMetric(e.target.value)}
-              />
-            </div>
-            
-            <button 
-              onClick={runTest}
-              disabled={!metric || status === "analyzing"}
-              className="w-full bg-white text-black font-black py-6 uppercase tracking-[0.3em] text-xs hover:bg-[#d2a06f] transition-colors"
-            >
-              {status === "analyzing" ? "Calculating Conflict Grid..." : "Execute Stress Test"}
-            </button>
-          </motion.div>
-        ) : (
-          <motion.div 
-            key="results"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-16"
-          >
-            {/* 9-Attribute Matrix visualization */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {matrix.map((attr, i) => (
-                <div key={i} className="space-y-3">
-                  <p className="text-[10px] uppercase font-bold text-gray-500">{attr.label}</p>
-                  <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                    <motion.div 
-                      initial={{ width: 0 }} 
-                      animate={{ width: `${attr.val}%` }} 
-                      transition={{ duration: 1, delay: i * 0.1 }}
-                      className={`h-full ${attr.color}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-10">
-              <h4 className="text-5xl font-black italic text-white tracking-tighter uppercase">The Conflict Map</h4>
-              <p className="text-[#d2a06f] font-mono text-sm uppercase tracking-widest">{metric}</p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                { role: "CFO", risk: "High", text: "Vetoed. Cash-flow delta too high for current WACC." },
-                { role: "CEO", risk: "Med", text: "Stalled. Narrative risk vs current market growth." },
-                { role: "Sustainability", risk: "Low", text: "Approved. Aligns with Science Based Targets." }
-              ].map((p, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 + (i * 0.2) }}
-                  className="p-8 border border-white/5 bg-white/5 hover:bg-white/[0.07] transition-all"
-                >
-                  <div className="flex justify-between items-center mb-6">
-                    <span className="text-[10px] font-black text-[#d2a06f] tracking-widest">{p.role}</span>
-                    <span className={`text-[9px] px-2 py-0.5 border ${p.risk === 'High' ? 'border-red-500 text-red-500' : 'border-gray-500 text-gray-500'}`}>RISK: {p.risk}</span>
-                  </div>
-                  <p className="text-gray-300 font-serif italic text-sm leading-relaxed">"{p.text}"</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="p-10 bg-[#d2a06f] text-black">
-              <h5 className="font-black uppercase tracking-[0.2em] text-xs mb-4">Consultancy Deliverable: Meeting Agenda</h5>
-              <div className="space-y-2 text-sm leading-relaxed font-bold">
-                <p>1. Align Carbon Proxy data with existing hurdle rates.</p>
-                <p>2. Define the "Profitability Shield" for CapEx overages.</p>
-                <p>3. Negotiate the Audit scope with the Risk Committee.</p>
-              </div>
-            </div>
-            
-            <button 
-              onClick={() => setStatus("idle")}
-              className="text-[10px] font-bold text-gray-600 uppercase tracking-widest hover:text-white"
-            >
-              ← Test New Metric
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+  const [route,setRoute]=useState('example');
+  const [drafts,setDrafts]=useState({existing:{...blank},paired:{...blank}});
+  const [submissions,setSubmissions]=useState({});
+  const [stage,setStage]=useState(0);
+  const [records,setRecords]=useState({});
+  const [notice,setNotice]=useState('');
+  const output=useRef(null);
+  const custom=route!=='example';
+  const paired=route==='paired';
+  const submission=submissions[route];
+  const metric=custom?submission:eps;
+  const issues=custom?(metric?worksheetIssues(metric,paired):[]):epsIssues;
+  const notes=records[route]||{};
+  const open=issues.filter(i=>!notes[i.id]?.resolved);
+  const draft=drafts[route];
+  function choose(value) {setRoute(value);setStage(0);setNotice('');}
+  function update(id,change) {setRecords(prev=>({...prev,[route]:{...prev[route],[id]:{...prev[route]?.[id],...change}}}));}
+  function submit(event) {
+    event.preventDefault();
+    const cleaned=Object.fromEntries(Object.entries(draft).map(([k,v])=>[k,v.trim()]));
+    const required=paired?['sustainability','financial','decision','context']:Object.keys(blank);
+    if(!required.every(k=>cleaned[k])) {setNotice('Please complete each required field with a definition or context.');return;}
+    if(paired){cleaned.name=cleaned.financial+' + '+cleaned.sustainability;cleaned.formula='Integration method not yet established';}
+    setSubmissions(prev=>({...prev,[route]:cleaned}));setRecords(prev=>({...prev,[route]:{}}));setStage(0);setNotice('Review worksheet prepared. No information has been sent to a researcher or AI service.');
+    requestAnimationFrame(()=>output.current?.focus());
+  }
+  function download() {
+    const text=['METRIC LAB | REVIEW AND MEETING AGENDA',metric.name,metric.formula,metric.definition||'',`Sustainability component: ${metric.sustainability}`,`Financial component: ${metric.financial}`,`Decision: ${metric.decision||'Not specified'}`,`Context: ${metric.context||'Not specified'}`,'',custom?'Framework-based worksheet. All attribute classifications remain unassessed.':'Researcher-supplied baseline. Role interpretations are illustrative proposals, not interview findings.','No live AI or interview evidence is connected.','',...(paired?['INTEGRATION QUESTIONS',...integrationChecks.map(([title,q])=>`${title}: ${q}`),'']:[]),'NINE-ATTRIBUTE MATRIX',...attributes.flatMap(a=>{const profile=epsProfile.find(p=>p.id===a.id);return [a.name,custom?'Not assessed':`Baseline: ${profile.value}\nAssumption: ${profile.assumption}`,...reviewRoles.map((r,i)=>`${r}: ${custom?'Not assessed. '+a.questions[i%a.questions.length]:profile.roles[i].join(' · ')}`),notes['attribute-'+a.id]?.note?`User assessment note: ${notes['attribute-'+a.id].note}`:''];}),'','OPEN AGENDA',...open.flatMap((i,n)=>[`${n+1}. ${notes[i.id]?.agenda||i.question}`,`Source issue: ${i.title}`,`Basis: ${custom?'Framework-based prompt':'Illustrative interpretation'}`,`Expected output: ${i.output}`,...reviewRoles.map((r,index)=>`${r}: ${notes[i.id]?.positions?.[index]||i.positions[index]} (${notes[i.id]?.positions?.[index]?'User-entered position':'Proposed question'})`),`Notes: ${notes[i.id]?.note||'None'}`,'']),'RESOLVED BY USER',...issues.filter(i=>notes[i.id]?.resolved).map(i=>`${i.title}: ${notes[i.id].note}`)].join('\n');
+    const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='Metric-Lab-Review-Agenda.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);setNotice('Your review and agenda have been downloaded.');
+  }
+  return <div className="workbench simplified-lab">
+    <div className="entry-heading"><span className="research-tag">Start where you are</span><h3>One framework. Two ways in.</h3><p>Explore the worked example, or prepare your own metric review.</p></div>
+    <div className="entry-options">
+      <button onClick={()=>choose('existing')} aria-pressed={route==='existing'}><span>01 · Assess</span><strong>I have an integrated metric</strong><p>Examine its construction, assumptions and managerial meaning.</p></button>
+      <button onClick={()=>choose('paired')} aria-pressed={paired}><span>02 · Connect</span><strong>I have separate metrics</strong><p>Explore whether financial and sustainability measures belong together.</p></button>
     </div>
-  );
+    <div className="example-switch"><button className="text-button" aria-pressed={!custom} onClick={()=>choose('example')}>Explore the carbon-adjusted EPS example</button><span>First researcher-supplied case</span></div>
+    {custom&&<form className="custom-form" onSubmit={submit}><div className="form-heading"><h3>{paired?'Explore a possible connection.':'Bring your integrated metric.'}</h3><p>Prepare a worksheet for discussion. Research-grounded AI assessment will be added in a later stage. Your entries stay in this page until you download them.</p></div><div className="custom-fields">{(paired?[['financial','Financial metric and definition'],['sustainability','Sustainability metric and definition'],['decision','Decision these metrics should support'],['context','Company context, units, boundaries and reporting period']]:[['name','Metric name'],['formula','Formula or calculation'],['sustainability','Sustainability component'],['financial','Financial component'],['decision','Decision this metric should support'],['context','Company context, units, boundaries and reporting period']]).map(([key,label])=><label key={key}>{label}<textarea rows={2} required maxLength={1200} value={draft[key]} onChange={e=>setDrafts(prev=>({...prev,[route]:{...prev[route],[key]:e.target.value}}))}/></label>)}</div>{submission&&<p className="form-warning">Preparing a new worksheet replaces the previous worksheet and notes for this entry point. Download the existing review first to keep it.</p>}<button className="button primary" type="submit">Prepare review worksheet ↗</button></form>}
+    {notice&&<p className="workbench-notice" role="status">{notice}</p>}
+    {metric&&<div ref={output} tabIndex={-1} className="guided-output">
+      <div className="review-overview"><div><span className="research-tag">{custom?'Your inputs · assessment pending':'Worked example · researcher-supplied baseline'}</span><h3>{metric.name}</h3><p>{metric.definition||`Intended decision · ${metric.decision}`}</p></div><span className="case-number">{custom?'YOUR REVIEW':'CASE 01'}</span></div>
+      <div className="component-pair"><div><span>Sustainability component</span><strong>{metric.sustainability}</strong></div><div><span>Financial component</span><strong>{metric.financial}</strong></div></div>
+      <p className="formula-band">{metric.formula}</p>
+      <div className="evidence-banner"><p>{custom?'This is a preparation worksheet. It does not yet assess your metric or recommend an integration method.':'The baseline reflects Dounia Chlyeh’s proposed classifications. Role perspectives and possible tensions are illustrative applications for review.'} No live AI or interview evidence is connected.</p></div>
+      <nav className="review-steps" aria-label="Review steps">{['Understand the metric','Compare nine attributes','Explore potential friction','Prepare the agenda'].map((label,index)=><button key={label} aria-current={stage===index?'step':undefined} onClick={()=>setStage(index)}><span>0{index+1}</span>{label}</button>)}</nav>
+      <div className="lab-panel">
+      {stage===0&&<><div className="view-intro"><div><p className="eyebrow">Begin with meaning</p><h3>{paired?'Should these measures be integrated?':'What would this number tell you?'}</h3><p>{custom?'Use the questions below to prepare a defensible assessment.': 'This metric connects company earnings and emissions through a carbon-price assumption. Its interpretation depends on what that price represents.'}</p></div></div>
+        {paired?<><div className="integration-checks">{integrationChecks.map(([title,q],i)=><article key={title}><span>0{i+1}</span><div><h4>{title}</h4><p>{q}</p></div></article>)}</div><div className="key-question"><h4>Integration is a possibility, not a requirement.</h4><p>The review may support an integrated candidate, identify missing evidence, or conclude that the measures are better interpreted together but kept separate. These proposed design questions complement the nine-attribute framework.</p></div></>:<div className="key-question"><span>One question to start the conversation</span><h4>{custom?'What would an improvement mean, and what would you do differently?':'Does the carbon price represent a financial expense, an internal shadow price, or an environmental cost?'}</h4><p>{custom?'Agree on the intended outcome before assessing whether the formula captures it.':'The same formula can support different interpretations. This assumption remains open in the worked example.'}</p></div>}
+        {!custom&&<details className="simple-details"><summary>See the baseline and its assumptions</summary><div className="baseline-grid">{epsProfile.map(p=><article key={p.id}><h4>{attributes.find(a=>a.id===p.id).name}</h4><strong>{p.value}</strong><p>{p.assumption}</p></article>)}</div></details>}
+        <button className="button primary" onClick={()=>setStage(1)}>Compare the nine attributes →</button>
+      </>}
+      {stage===1&&<><div className="view-intro"><div><h3>Nine attributes. Three perspectives.</h3><p>{custom?'All classifications remain unassessed. These questions show what each role could examine.':'The baseline is shared. Different responsibilities can change its practical meaning without requiring different scores.'}</p></div></div><div className="map-scroll" tabIndex={0} role="region" aria-label="Nine-attribute matrix, scroll horizontally on smaller screens"><table className="conflict-table assessment-table"><caption className="sr-only">Nine-attribute baseline and proposed CEO, sustainability manager and operational manager interpretations</caption><thead><tr><th scope="col">Attribute and baseline</th>{reviewRoles.map(r=><th scope="col" key={r}>{r}</th>)}</tr></thead><tbody>{attributes.map(a=>{const p=epsProfile.find(p=>p.id===a.id);return <tr key={a.id}><th scope="row">{a.name}<span className="baseline-value">{custom?'Not assessed':p.value}</span><details><summary>Assumptions & notes</summary><p>{custom?a.definition:p.assumption}</p><label>Your assessment note<textarea rows={2} maxLength={1800} value={notes['attribute-'+a.id]?.note||''} onChange={e=>update('attribute-'+a.id,{note:e.target.value})}/></label></details></th>{reviewRoles.map((r,i)=><td key={r}><strong>{custom?'Not assessed':p.roles[i][0]}</strong><p>{custom?a.questions[i%a.questions.length]:p.roles[i][1]}</p><small>{custom?'Framework-based question':'Proposed role interpretation'}</small></td>)}</tr>})}</tbody></table></div><p className="profile-note">Categories and levels describe different attributes. There is no overall score. Notes are retained in your download; they do not automatically establish disagreement.</p><button className="button primary" onClick={()=>setStage(2)}>See where perspectives may differ →</button></>}
+      {stage===2&&<><div className="view-intro"><div><h3>Where perspectives may differ.</h3><p>Three issues to investigate. Different questions do not prove that the participants disagree.</p></div><span className="prototype-label">{custom?'Framework-based prompts':'Illustrative conflict map'}</span></div><div className="conflict-cards">{issues.map((issue,index)=>{const entry=notes[issue.id]||{};return <article key={issue.id} className="friction-card"><div className="friction-title"><span>0{index+1}</span><div><span className="issue-status">{entry.resolved?'Resolved by you':issue.kind}</span><h4>{issue.title}</h4></div></div><div className="role-comparison">{reviewRoles.map((r,i)=><div key={r}><strong>{r}</strong><p>{entry.positions?.[i]||issue.positions[i]}</p><small>{entry.positions?.[i]?'User-entered position':'Question to explore'}</small></div>)}</div><details className="simple-details"><summary>Why it matters & record a resolution</summary><p>{issue.why}</p><div className="dimension-tags">{issue.attrs.map(id=><span key={id}>{attributes.find(a=>a.id===id).name}</span>)}</div><p><strong>What would help</strong> · {issue.output}</p><div className="position-fields">{reviewRoles.map((r,i)=><label key={r}>{r} position<textarea rows={2} maxLength={1000} value={entry.positions?.[i]||''} onChange={e=>update(issue.id,{positions:{...entry.positions,[i]:e.target.value}})}/></label>)}</div><label className="resolution-label">Resolution or evidence needed<textarea rows={2} maxLength={2000} value={entry.note||''} onChange={e=>update(issue.id,{note:e.target.value,resolved:e.target.value.trim()?entry.resolved:false})}/></label><label className="resolve-check"><input type="checkbox" disabled={!entry.note?.trim()} checked={!!entry.resolved} onChange={e=>update(issue.id,{resolved:e.target.checked})}/>Mark this issue resolved</label></details></article>})}</div><button className="button primary" onClick={()=>setStage(3)}>Prepare the meeting agenda →</button></>}
+      {stage===3&&<><div className="view-intro"><div><h3>A meeting with a clear purpose.</h3><p>{open.length} open discussion {open.length===1?'point':'points'}, each linked to an issue in the map. Edit the wording before downloading.</p></div><button className="button primary" onClick={download}>Download review & agenda ↓</button></div><div className="agenda-list">{open.map((issue,index)=><article className="agenda-item" key={issue.id}><span className="agenda-index">0{index+1}</span><div><label>Discussion point {index+1}<textarea rows={2} maxLength={2000} value={notes[issue.id]?.agenda??issue.question} onChange={e=>update(issue.id,{agenda:e.target.value})}/></label><p><strong>Expected meeting output</strong>{issue.output}</p><button className="text-button" onClick={()=>setStage(2)}>Source issue · {issue.title} ↗</button></div></article>)}</div>{!open.length&&<p className="empty-message">All three issues have been marked resolved. Download the review to retain your decisions and notes.</p>}</>}
+      </div>
+    </div>}
+    <div className="workbench-footer"><span>Research framework by Dounia Chlyeh · human review remains essential</span><span>Page-local work · download before reloading</span></div>
+  </div>;
 }

@@ -1,102 +1,57 @@
 "use client";
-import { motion } from 'framer-motion';
-import MetricLab from './components/MetricLab';
+
+import { useState } from "react";
+import PreparedReview from "./components/PreparedReview";
+import FrameworkExplorer from "./components/FrameworkExplorer";
+
+const perspectives = [
+  { name: "CFO", question: "Does this change the investment case?", detail: "Margin · Return on capital · Payback", tag: "A strategic perspective" },
+  { name: "Sustainability manager", question: "Does this improve the actual impact?", detail: "Emissions · Energy · Resource use", tag: "An impact lens" },
+  { name: "Business", question: "What can my team do differently?", detail: "Processes · Resources · Delivery", tag: "An operational lens" },
+];
 
 export default function Home() {
+  const [perspective, setPerspective] = useState(0);
+  const view = perspectives[perspective];
   return (
-    <main className="min-h-screen">
-      {/* Dynamic Header */}
-      <nav className="fixed top-0 w-full z-50 mix-blend-difference p-6 flex justify-between items-center text-white">
-        <div className="font-black text-2xl tracking-tighter italic">CONVERGE.AI</div>
-        <div className="text-[10px] font-bold uppercase tracking-[0.3em]">Governance Lab 2024</div>
-      </nav>
-
-      {/* Hero: High Contrast Provocation */}
-      <section className="min-h-screen flex items-center px-6 bg-[#00332c] text-[#fdfdfd]">
-        <div className="max-w-6xl mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-7xl md:text-[140px] font-black leading-[0.8] tracking-tighter"
-          >
-            EXPENSIVE TO <br />
-            <span className="text-[#d2a06f]">PRODUCE.</span><br />
-            CHEAP TO <span className="opacity-30 italic">IGNORE.</span>
-          </motion.h1>
-          
-          <motion.div 
-             initial={{ opacity: 0 }}
-             whileInView={{ opacity: 1 }}
-             transition={{ delay: 0.5 }}
-             className="mt-20 max-w-xl border-l-2 border-[#d2a06f] pl-8"
-          >
-            <p className="text-xl font-light leading-relaxed">
-              CSRD created a reporting engine. But capital still runs on ROCE and Margin. 
-              We bridge the gap where sustainability data usually dies.
-            </p>
-          </motion.div>
+    <>
+      <a className="skip-link" href="#main">Skip to content</a>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a className="brand" href="#" aria-label="Metric Lab home"><span className="brand-mark" aria-hidden="true">≋</span>Metric<span className="brand-ai"> Lab</span></a>
+          <nav aria-label="Main navigation"><a href="#approach">The approach</a><a href="#framework" className="framework-nav">The research</a><a href="#lab" className="nav-cta">Explore the lab <span aria-hidden="true">↗</span></a></nav>
         </div>
-      </section>
-
-      {/* The Two-World Transition */}
-      <section className="py-32 px-6 bg-white">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-20">
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="p-12 bg-gray-50 border-t-4 border-gray-200"
-          >
-            <h2 className="text-xs font-mono uppercase tracking-widest text-gray-400 mb-6">The Disclosure World</h2>
-            <p className="text-3xl font-bold mb-4">Regulation Ready.</p>
-            <p className="text-gray-500">400+ static data points. Sunk costs. Audit trails. The data that stops at the boardroom door.</p>
-          </motion.div>
-
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="p-12 bg-[#00332c] text-white border-t-4 border-[#d2a06f]"
-          >
-            <h2 className="text-xs font-mono uppercase tracking-widest text-[#d2a06f] mb-6">The Decision World</h2>
-            <p className="text-3xl font-bold mb-4 italic">Execution Ready.</p>
-            <p className="text-gray-100">Dynamic KPIs. Capital allocation. Margin-linked strategy. The data that actually moves the needle.</p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* The App: Dark Mode Vibrancy */}
-      <section className="py-32 px-6 bg-slate-900 overflow-hidden relative">
-        {/* Background glow */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#d2a06f] opacity-10 blur-[120px]" />
-        
-        <div className="max-w-5xl mx-auto relative z-10">
-          <div className="mb-20 text-center">
-            <h2 className="text-white text-5xl font-black tracking-tight mb-4 uppercase">The Friction Lab</h2>
-            <p className="text-[#d2a06f] font-serif italic text-xl">Run the disagreement before the commitment.</p>
+      </header>
+      <main id="main">
+        <section className="hero container">
+          <div className="hero-copy">
+            <p className="eyebrow"><span className="eyebrow-line" />Sustainability meets financial performance</p>
+            <h1 className="story-headline">Your metric combines sustainability and finance.<br /><em>Does it support a better decision?</em></h1>
+            <p className="hero-lead">Examine the assumptions before you rely on the result.</p>
+            <p className="hero-description">Metric Lab helps sustainability and management teams examine integrated KPIs before using them in decisions. Explore their assumptions, identify evidence gaps and prepare the questions that need agreement.</p>
+            <div className="hero-actions"><a href="#lab" className="button primary">Explore a metric <span aria-hidden="true">↗</span></a><a className="quiet-link" href="#approach">See how it works <span aria-hidden="true">↓</span></a></div>
           </div>
-          <MetricLab />
-        </div>
-      </section>
-
-      {/* Philosophy: The Outcome */}
-      <section className="py-32 px-6 bg-[#fdfdfd]">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div 
-             initial={{ opacity: 0, scale: 0.9 }}
-             whileInView={{ opacity: 1, scale: 1 }}
-             className="mb-12 inline-block p-4 border border-black"
-          >
-            <p className="text-[10px] font-black uppercase tracking-[0.4em]">Governance Stance</p>
-          </motion.div>
-          <h2 className="text-4xl font-black leading-tight mb-8">AI Reveals. Humans Decide.</h2>
-          <p className="text-xl text-gray-600 leading-relaxed italic">
-            "We don't decide for you. We produce the agenda for the meeting where humans do the real work of governance."
-          </p>
-        </div>
-      </section>
-
-      <footer className="py-20 bg-white border-t border-gray-100 text-center">
-        <p className="text-[10px] font-bold uppercase tracking-[0.5em] text-gray-300 italic">
-          Dounia-007 / Sustainability Capital Architecture
-        </p>
-      </footer>
-    </main>
+          <div className="decision-card">
+            <div className="card-top"><span>The decision gap</span><span className="small-pill">Three perspectives</span></div>
+            <div className="two-worlds"><div><span className="mini-label">What gets reported</span><h2>Emissions.<br />Energy.<br />Resources.</h2></div><span className="world-divider" aria-hidden="true">↔</span><div><span className="mini-label">What gets decided</span><h2>Margin.<br />ROCE.<br />Payback.</h2></div></div>
+            <div className="metric-bridge"><span className="bridge-symbol" aria-hidden="true">↗</span><div><strong>One integrated metric.</strong><span>A shared decision?</span></div></div>
+            <div className="lens-controls" aria-label="Explore a perspective">{perspectives.map((p, i) => <button key={p.name} type="button" aria-pressed={perspective === i} onClick={() => setPerspective(i)}>{p.name}</button>)}</div>
+            <div className="lens-answer" aria-live="polite"><span className="mini-label">{view.tag}</span><p key={view.name}>{view.question}</p><span className="lens-detail">{view.detail}</span></div>
+            <p className="card-caption">Find the consequential assumptions. Watch the question change.</p>
+          </div>
+        </section>
+        <div className="principle-strip"><div className="container"><span>One metric.</span><span>Explicit assumptions.</span><strong>A decision to prepare.</strong><span className="strip-arrow" aria-hidden="true">↗</span></div></div>
+        <section className="problem-section container" id="problem"><div><p className="eyebrow">The missing connection</p><h2>Two measurement systems.<br /><em>One decision-making room.</em></h2></div><div className="problem-copy"><p>Companies track emissions, costs, revenue and investment. Yet sustainability information can remain in reporting while financial measures drive decisions.</p><p>A metric can improve while the people using it disagree about what improved, who influenced it and what should happen next. Agreement is also possible. The task is to make the reasoning explicit.</p><p className="failure-copy">That is the failure when the systems remain disconnected. One governs decisions; the other governs disclosure.</p><strong>The challenge is connecting what gets measured to what people decide.</strong></div></section>
+        <section className="approach-section" id="approach"><div className="container"><div className="section-heading"><div><p className="eyebrow">From measurement to meaning</p><h2>Run the disagreement.<br /><em>Before the commitment.</em></h2></div><p>Bring an existing iKPI or separate financial and sustainability measures. Leave with a clearer understanding of what they capture, what they may conceal and how they could inform action.</p></div><div className="steps-grid">
+          <article className="step-card"><span className="step-number">01</span><span className="step-icon" aria-hidden="true">↗</span><h3>Examine the connection.</h3><p>Does this metric meaningfully connect sustainability and financial performance? Examine it through nine research attributes, with assumptions and missing evidence made visible.</p><span className="step-foot">Your output · An attribute assessment</span></article>
+          <article className="step-card"><span className="step-number">02</span><span className="step-icon" aria-hidden="true">⇄</span><h3>Find the consequential assumptions.</h3><p>Which assumptions could change the decision? Identify evidence gaps, unclear responsibilities and potential disagreements, then ask your actual participants to examine them.</p><span className="step-foot">Your output · A potential conflict map</span></article>
+          <article className="step-card"><span className="step-number">03</span><span className="step-icon" aria-hidden="true">≡</span><h3>Prepare to use it.</h3><p>What must you resolve before relying on this metric? Take a focused agenda into the meeting to clarify evidence, responsibilities and decision rules.</p><span className="step-foot">Your output · A discussion agenda</span></article>
+        </div></div></section>
+        <FrameworkExplorer />
+        <section className="lab-section" id="lab"><div className="container"><div className="section-heading lab-heading"><div><p className="eyebrow">The friction lab</p><h2>Bring your measures.<br /><em>Examine the connection.</em></h2></div><div className="demo-explainer"><span className="demo-label">Working prototype</span><p>Assess your own metric with feedback from your team. For guidance, explore the worked example below.</p></div></div><PreparedReview /><p className="lab-disclaimer">Agreement is a reason to investigate further, not proof that a metric is valid. Human judgement remains essential.</p></div></section>
+        <section className="closing container"><p className="eyebrow">What you take away</p><h2>A clearer view of your metric.<br /><em>A better starting point for action.</em></h2><p>Understand what your metric captures, what it may conceal and what needs resolving before you use it. Your team leaves with an assessment, a potential conflict map and a focused agenda.</p><a className="button primary" href="#lab">Start the conversation <span aria-hidden="true">↗</span></a></section>
+      </main>
+      <footer className="site-footer container"><a className="brand" href="#"><span className="brand-mark" aria-hidden="true">≋</span>Metric<span className="brand-ai"> Lab</span></a><span>Sustainability. Financial performance. Shared decisions.</span><a href="#">Back to top ↑</a></footer>
+    </>
   );
 }
